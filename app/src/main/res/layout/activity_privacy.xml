@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/skin"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header Title -->
+        <TextView
+            android:id="@+id/privacyHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy and Terms"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary"
+            android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
+            android:letterSpacing="0.05" />
+
+        <!-- Card background -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/privacyText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black2"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="10dp"
+                    android:fontFamily="sans-serif"
+                    android:text="🔐 Privacy Policy\nLast updated: April 2025\n\nAt Cognitive Kidz Home Training, we care deeply about your privacy and are committed to protecting the personal information of both children and parents who use our app. This policy explains how we collect, use, share, and safeguard your data.\n\n
+                    📋 Information We Collect\n\n👉 Personal Information:\n• Name of the parent or guardian\n• Child’s name \n• Email address\n• Device information\n• Location data (only with your permission)
+                    \n\n👉 Usage Information:\n• App usage patterns\n• Features accessed\n• Session duration\n• Performance statistics
+                    \n\n🎯 How We Use Your Information\n• Deliver a personalized learning experience\n• Monitor and improve app performance\n• Provide progress reports to parents/guardians\n• Ensure security and detect misuse\n• Communicate with you about updates or support needs
+                    \n\n🔗 Sharing Your Data\nWe do not sell or rent your data to anyone. We may share your information only with:\n• Service providers who help us run the app (e.g., analytics or cloud storage)\n• Legal authorities, if required by law or to protect our users and platform\nAll third parties we work with are bound by strict confidentiality agreements.
+                    \n\n🔒 Data Security\nWe use industry-standard security practices to keep your data safe. While no digital system is completely secure, we continuously update our protections to minimize risks.
+                    \n\n👶 Children's Privacy\nThis app is designed for kids, but we take special care to protect their privacy.\nWe do not collect personal information from children without parental consent. Parents have full control over what is shared or stored.
+                    \n\n🔄 Changes to This Policy\nWe may update this Privacy Policy from time to time. You’ll be notified of significant changes within the app or via email.
+                    \n\n📬 Contact Us\nIf you have any questions, concerns, or requests regarding your data, please reach out to:\n\nCognitive Kidz Home Training Team\nEmail: support@cognitivekidz.com" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>

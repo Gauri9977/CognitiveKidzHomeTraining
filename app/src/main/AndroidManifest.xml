@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CognitiveKidsHomeTraining"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".dr_todo"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
+        <activity
+            android:name=".dr_profile"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
+        <activity
+            android:name=".dr_activities"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
+        <activity android:name=".FormWebViewActivity" />
+        <activity
+            android:name=".GoogleForm"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
+        <activity
+            android:name=".child_detail"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
+        <activity
+            android:name=".dr_child_list"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
+        <activity
+            android:name=".dr_consult"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
+        <activity
+            android:name=".dr_home"
+            android:exported="false" />
+        <activity
+            android:name=".myActivity"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar" />
+        <activity
+            android:name=".form"
+            android:exported="false" />
+        <activity
+            android:name=".report1"
+            android:exported="false"
+            android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar" />
+        <activity
+            android:name=".about_us_old"
+            android:exported="false"
+            android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar" />
+        <activity
+            android:name=".rewards"
+            android:exported="false"
+            android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar" />
+        <activity
+            android:name=".academic_activity"
+            android:exported="false"
+            android:label="@string/title_activity_academic"
+            android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".todo"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".feedback"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".consultation"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".report"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".profile"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".drawerlayout"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".home"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".registration"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".login"
+            android:exported="false"
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+    </application>
+
+</manifest>

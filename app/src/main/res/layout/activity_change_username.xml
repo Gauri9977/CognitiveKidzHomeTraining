@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/skin"
+    android:padding="16dp">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_change_username"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="@android:color/transparent"
+        app:title="Change Username"
+        app:titleTextColor="@color/black"
+        app:navigationIcon="@drawable/ic_back_arrow"
+        app:navigationIconTint="@color/black"
+        app:contentInsetStart="0dp"
+        android:elevation="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Light" />
+
+    <!-- Old Username -->
+    <EditText
+        android:id="@+id/edit_old_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Current username"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:inputType="textPersonName" />
+
+    <!-- New Username -->
+    <EditText
+        android:id="@+id/edit_new_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="New username"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:inputType="textPersonName" />
+
+    <!-- Submit Button -->
+    <Button
+        android:id="@+id/btn_update_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Update Username"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/blue"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+</LinearLayout>

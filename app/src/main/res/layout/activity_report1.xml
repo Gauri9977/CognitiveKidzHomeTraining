@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/report1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".report1"
+    android:orientation="vertical"
+    android:background="@color/blue">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <include layout="@layout/toolbar"/>
+
+    <!-- res/layout/activity_main.xml -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:layout_margin="10sp"
+        android:background="@color/skin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10sp"
+            >
+
+            <!-- Client and Reference Details -->
+            <TextView
+                android:text="Client Name: Mr. Vihan Jagtap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/textcolour"
+                android:textSize="16sp" />
+
+            <TextView
+                android:text="Reference: Dr. Shreeganesh Patil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textcolour"
+                android:textSize="14sp" />
+
+            <TextView
+                android:text="Date of Birth: 04/03/2021"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textcolour"
+                android:textSize="14sp" />
+
+            <TextView
+                android:text="Referral for: IQ/DQ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textcolour"
+                android:textSize="14sp" />
+
+            <TextView
+                android:text="Reg. No.: 019/24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textcolour"
+                android:textSize="14sp" />
+
+            <TextView
+                android:text="Chronological Age: 03 Years 01 Months 13 Days (37 M 13 D)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/textcolour"
+                />
+
+            <TextView
+                android:text="Cont. No.: +91-8623812780"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/textcolour"
+                />
+
+            <TextView
+                android:text="Informant: Mother, Father, Both Parents, Other Relationships"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/textcolour"
+                />
+
+            <TextView
+                android:text="Medium: Marathi/English"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/textcolour"
+                />
+
+            <TextView
+                android:text="Current School Name: Nil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/textcolour"
+                />
+
+            <TextView
+                android:text="STD: Nil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/textcolour"
+                />
+
+            <TextView
+                android:text="Language of Administration: Marathi, Hindi, English, Kannada"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/textcolour"
+                />
+
+            <TextView
+                android:text="Test Administered: Development Screening Test (DST) and VSMS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/textcolour"
+                />
+
+            <!-- Brief History -->
+            <TextView
+                android:text="Brief History"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/textcolour"
+                />
+
+            <TextView
+                android:text="Mother's conception age was 27 y.; consanguinity is absent. She had regular antenatal check-ups and a full-term C-section at the hospital. Birth weight was normal (3.0kg). Immediate birth cry was present, breastfeeding was normal, and developmental milestones were age-appropriate. All vaccinations were given on time, and no complications were reported. Developmental information is provided by the parent."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:lineSpacingExtra="4dp"
+                android:textColor="@color/textcolour"
+                />
+
+            <!-- Test Results -->
+            <TextView
+                android:text="Tests and Results"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/textcolour"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:text="Developmental Screening Test (DST)"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/textcolour"
+                />
+
+            <TextView
+                android:text="Score: 23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textcolour"
+                android:textSize="14sp" />
+
+            <TextView
+                android:text="Global Developmental Delay along with Mild IDD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/textcolour"
+                android:layout_marginBottom="8dp" />
+
+            <!-- DST Score Table -->
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1">
+
+                <TableRow>
+                    <TextView
+                        android:text="DOMAIN"
+                        android:padding="8dp"
+                        android:background="#D3D3D3"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:textColor="@color/textcolour"
+                        />
+                    <TextView
+                        android:text="REMARK - DA/MA"
+                        android:padding="8dp"
+                        android:background="#D3D3D3"
+                        android:textStyle="bold"
+                        android:textColor="@color/textcolour"
+                        android:layout_weight="1" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Cognition"
+                        android:padding="8dp"
+                        android:textColor="@color/textcolour"
+                        android:layout_weight="1" />
+                    <TextView
+                        android:text="2 YEARS 1 MONTH 15 DAYS"
+                        android:padding="8dp"
+                        android:textColor="@color/textcolour"
+                        android:layout_weight="1" />
+                </TableRow>
+
+                <!-- Add rows for Communication, Social, and Locomotor similarly -->
+            </TableLayout>
+
+            <!-- Clinical Observation -->
+            <TextView
+                android:text="Clinical Observation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/textcolour"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:text="Attention and Concentration: Not good; lacks environmental functioning.\nComprehension: Low; unable to follow simple instructions."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textcolour"
+                android:textSize="14sp" />
+
+            <!-- Additional Sections (Language, Sensory, Behavior) -->
+            <!-- Recommendations -->
+            <TextView
+                android:text="Recommendations: Occupational Therapy, Speech Therapy, Parental Counselling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textcolour"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Reassessment Date -->
+            <TextView
+                android:text="Reassessment after 01 Year 011 Months 17 Days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FF5722"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/report1"/>
+
+        </LinearLayout>
+    </ScrollView>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/dr_activity_page"
+    android:background="@color/skin"
+    android:layout_gravity="center"
+    tools:context=".dr_home">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include layout="@layout/toolbar"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:padding="16dp">
+
+            <!-- Table Header -->
+            <TableRow>
+                <TextView
+                    android:text="Time"
+                    android:textStyle="bold"
+                    android:padding="8dp"/>
+                <TextView
+                    android:text="Child Name"
+                    android:textStyle="bold"
+                    android:padding="8dp"/>
+                <TextView
+                    android:text="Therapist"
+                    android:textStyle="bold"
+                    android:padding="8dp"/>
+            </TableRow>
+
+            <!-- Table Rows -->
+            <TableRow>
+                <TextView android:text="9:00 AM - 10:00 AM" android:padding="8dp"/>
+                <TextView android:text="Aarav" android:padding="8dp"/>
+                <TextView android:text="Dr. Mehta" android:padding="8dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="10:00 AM - 11:00 AM" android:padding="8dp"/>
+                <TextView android:text="Anaya" android:padding="8dp"/>
+                <TextView android:text="Dr. Patel" android:padding="8dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="11:00 AM - 12:00 PM" android:padding="8dp"/>
+                <TextView android:text="Vihaan" android:padding="8dp"/>
+                <TextView android:text="Dr. Shah" android:padding="8dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="12:00 PM - 1:00 PM" android:padding="8dp"/>
+                <TextView android:text="Myra" android:padding="8dp"/>
+                <TextView android:text="Dr. Mehta" android:padding="8dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="1:00 PM - 2:00 PM" android:padding="8dp"/>
+                <TextView android:text="Ishaan" android:padding="8dp"/>
+                <TextView android:text="Dr. Shah" android:padding="8dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="2:00 PM - 3:00 PM" android:padding="8dp"/>
+                <TextView android:text="Siya" android:padding="8dp"/>
+                <TextView android:text="Dr. Patel" android:padding="8dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="3:00 PM - 4:00 PM" android:padding="8dp"/>
+                <TextView android:text="Kabir" android:padding="8dp"/>
+                <TextView android:text="Dr. Mehta" android:padding="8dp"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="4:00 PM - 5:00 PM" android:padding="8dp"/>
+                <TextView android:text="Tanya" android:padding="8dp"/>
+                <TextView android:text="Dr. Shah" android:padding="8dp"/>
+            </TableRow>
+
+        </TableLayout>
+
+    </LinearLayout>
+    <include layout="@layout/fragment_drawer1"/>
+</androidx.drawerlayout.widget.DrawerLayout>

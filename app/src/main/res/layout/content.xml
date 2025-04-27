@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/skin"
+    android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/textcolour"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/newicon"
+            android:contentDescription="App Icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cognitive Kidz Home Training"
+            android:textColor="@color/skin"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="12dp" />
+    </LinearLayout>
+
+    <!-- Menu Items -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="8dp"
+            android:background="@color/skin">
+
+            <!-- Function to define each row -->
+            <!-- PROFILE -->
+            <LinearLayout
+            android:id="@+id/profile_drawer_layout"
+            style="@style/DrawerItemStyle">
+
+            <ImageView
+                android:src="@drawable/profile"
+                style="@style/DrawerIconStyle" />
+
+            <TextView
+                android:id="@+id/content_profile"
+                style="@style/DrawerTextStyle"
+                android:text="Profile" />
+        </LinearLayout>
+
+
+            <!-- SETTINGS -->
+
+            <!-- ACCOUNT PRIVACY -->
+            <LinearLayout
+                android:id="@+id/settings_drawer_layout"
+                style="@style/DrawerItemStyle">
+
+                <ImageView
+                    style="@style/DrawerIconStyle"
+                    android:src="@drawable/settings" />
+
+                <TextView
+                    android:id="@+id/content_settings"
+                    style="@style/DrawerTextStyle"
+                    android:text="Settings" />
+            </LinearLayout>
+
+            <!-- ABOUT US -->
+            <LinearLayout
+                android:id="@+id/aboutus_drawer_layout"
+                style="@style/DrawerItemStyle">
+
+                <ImageView
+                    android:src="@drawable/about_us"
+                    style="@style/DrawerIconStyle" />
+
+                <TextView
+                    android:id="@+id/content_about_us"
+                    style="@style/DrawerTextStyle"
+                    android:text="About Us" />
+            </LinearLayout>
+
+            <!-- FEEDBACK -->
+            <LinearLayout
+                android:id="@+id/feedback_drawer_layout"
+                style="@style/DrawerItemStyle">
+
+                <ImageView
+                    android:src="@drawable/feedback"
+                    style="@style/DrawerIconStyle" />
+
+                <TextView
+                    android:id="@+id/content_feedback"
+                    style="@style/DrawerTextStyle"
+                    android:text="Feedback" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/account_privacy_layout"
+                style="@style/DrawerItemStyle">
+
+                <ImageView
+                    android:src="@drawable/privacy"
+                    style="@style/DrawerIconStyle" />
+
+                <TextView
+                    android:id="@+id/content_privacy"
+                    style="@style/DrawerTextStyle"
+                    android:text="Account Privacy" />
+            </LinearLayout>
+
+            <!-- TERMS & CONDITIONS -->
+            <LinearLayout
+                android:id="@+id/terms_drawer_layout"
+                style="@style/DrawerItemStyle">
+
+                <ImageView
+                    android:src="@drawable/t_n_c"
+                    style="@style/DrawerIconStyle" />
+
+                <TextView
+                    android:id="@+id/content_terms"
+                    style="@style/DrawerTextStyle"
+                    android:text="Terms and Conditions" />
+            </LinearLayout>
+
+            <!-- SIGN OUT -->
+            <LinearLayout
+                android:id="@+id/signout_layout_drawer"
+                style="@style/DrawerItemStyle">
+
+                <ImageView
+                    android:src="@drawable/sign_out"
+                    style="@style/DrawerIconStyle" />
+
+                <TextView
+                    android:id="@+id/content_signout"
+                    style="@style/DrawerTextStyle"
+                    android:text="Sign Out" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/appVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Version 1.3.5"
+                android:layout_gravity="center"
+                android:textStyle="italic"
+                android:textColor="@color/textcolour"
+                android:textSize="14sp"
+                android:layout_marginTop="24dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/dr_child_list"
+    android:background="@color/blue"
+    android:layout_gravity="center"
+    tools:context=".dr_home">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <include layout="@layout/toolbar"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/skin"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Child Details"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/textcolour"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        android:backgroundTint="@color/blue"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/border">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/childName1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Vihan Jagtap"
+                                android:textSize="20sp"
+                                android:textColor="@color/textcolour"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/childDisorder1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolour"
+                                android:textSize="18sp"
+                                android:text="IQ/DO" />
+
+                            <TextView
+                                android:id="@+id/childDoctor1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolour"
+                                android:textSize="18sp"
+                                android:text="Dr. Nitin Chavan" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/viewDetails1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/textcolour"
+                            android:textColor="@color/skin"
+                            android:text="View Details" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        android:backgroundTint="@color/blue"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/border">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/childName2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ABC XYZ"
+                                android:textSize="20sp"
+                                android:textColor="@color/textcolour"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/childDisorder2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolour"
+                                android:textSize="18sp"
+                                android:text="Autism" />
+
+                            <TextView
+                                android:id="@+id/childDoctor2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolour"
+                                android:textSize="18sp"
+                                android:text="Dr. Nitin Chavan" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/viewDetails2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/textcolour"
+                            android:textColor="@color/skin"
+                            android:text="View Details" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        android:backgroundTint="@color/blue"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/border">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/childName3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ABC XYZ"
+                                android:textSize="20sp"
+                                android:textColor="@color/textcolour"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/childDisorder3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolour"
+                                android:textSize="18sp"
+                                android:text="ADHD" />
+
+                            <TextView
+                                android:id="@+id/childDoctor3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolour"
+                                android:textSize="18sp"
+                                android:text="Dr. Nitin Chavan" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/viewDetails3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/textcolour"
+                            android:textColor="@color/skin"
+                            android:text="View Details" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        android:backgroundTint="@color/blue"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/border">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/childName4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ABC XYZ"
+                                android:textSize="20sp"
+                                android:textColor="@color/textcolour"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/childDisorder4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolour"
+                                android:textSize="18sp"
+                                android:text="ADHD" />
+
+                            <TextView
+                                android:id="@+id/childDoctor4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/textcolour"
+                                android:textSize="18sp"
+                                android:text="Dr. Nitin Chavan" />
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/viewDetails4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/textcolour"
+                            android:textColor="@color/skin"
+                            android:text="View Details" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+    </LinearLayout>
+    <include layout="@layout/fragment_drawer1"/>
+</androidx.drawerlayout.widget.DrawerLayout>

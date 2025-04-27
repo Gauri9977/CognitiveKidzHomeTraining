@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="370dp"
+    android:layout_height="600dp"
+    android:layout_gravity="center"
+    >
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consent form"
+        android:textColor="@color/black"
+        android:textSize="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.424"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.028"></TextView>
+
+    <TextView
+        android:layout_width="365dp"
+        android:layout_height="537dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="2dp"
+        android:text="1. The app for cognitive developmental disabled children, offering exercises to improve cognitive skills through interactive content.\n2. Involves regular, supervised use of the app, completion of tailored cognitive exercises, and interaction with adaptive learning technologies.\n3. To reduce risks like eye strain and decreased physical activity, set time limits, take regular breaks, and incorporate varied exercises.\n4. Your child’s data will be securely stored and used only to improve the learning experience.\n5. The app enhances cognitive skills, boosts motivation, and provides a personalized learning experience."
+        android:textColor="@color/black"
+        android:textSize="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"></TextView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

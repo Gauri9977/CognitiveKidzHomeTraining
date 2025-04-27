@@ -1,0 +1,60 @@
+<resources>
+    <style name="WordSlotStyle">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#333</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:background">@drawable/word_slot_background</item>
+    </style>
+    <style name="DrawerItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+    </style>
+
+    <style name="DrawerIconStyle">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <!-- <item name="android:tint">@color/textcolour</item> -->
+    </style>
+
+    <style name="DrawerTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/textcolour</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="FormInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:drawable/edit_text</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="FormLabel">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="FormRadioGroup">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="Theme.toolbarNoActionbar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here if needed -->
+    </style>
+
+</resources>

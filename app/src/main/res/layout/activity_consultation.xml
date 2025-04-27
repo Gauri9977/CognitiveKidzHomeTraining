@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue"
+    android:id="@+id/consult_drawer"
+    tools:context=".consultation">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <include layout="@layout/toolbar"/>
+
+
+        <LinearLayout
+            android:id="@+id/consult_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="@color/skin">
+
+            <TextView
+                android:id="@+id/tv_child_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:paddingBottom="16dp" />
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rb_accept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15sp"
+                    android:textSize="18sp"
+                    android:text="Accept the Appointment Request" />
+
+                <RadioButton
+                    android:id="@+id/rb_reschedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_marginTop="15sp"
+                    android:text="Reschedule the appointment" />
+
+                <RadioButton
+                    android:id="@+id/rb_postpone"
+                    android:layout_marginTop="15sp"
+                    android:textSize="18sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Postpone the weekly appointment" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/et_reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter reason"
+                android:visibility="gone"
+                android:padding="8dp"
+                android:textColor="@color/black"/>
+
+            <Button
+                android:id="@+id/btn_submit_response"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit Response"
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:backgroundTint="@color/textcolour"
+                android:textColor="@color/skin"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <include
+        layout="@layout/fragment_drawer" />
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
