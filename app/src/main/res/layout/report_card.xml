@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_margin="8dp"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="6dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Static report fields -->
+            <TextView android:id="@+id/dateText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/childName" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/age" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/disorder" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/doctorName" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/therapiesCompleted" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/therapiesMissed" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/activitiesCompleted" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/activitiesMissed" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/testsResults" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/clinicalObservation" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/doctorNote" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+            <!-- Doctor Edit Section (Visible only on edit day) -->
+            <EditText
+                android:id="@+id/editDoctorNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Doctor's Note"
+                android:visibility="gone"
+                android:background="@android:drawable/edit_text"
+                android:padding="8dp"
+                android:layout_marginTop="16dp" />
+
+            <Button
+                android:id="@+id/publishNoteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Publish Note"
+                android:visibility="gone"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.cardview.widget.CardView>

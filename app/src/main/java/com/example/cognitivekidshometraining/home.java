@@ -79,9 +79,9 @@ public class home extends AppCompatActivity {
             Intent intent=new Intent(home.this, rewards.class);
             startActivity(intent);
         });
-        //report
+        //Child report
         report.setOnClickListener(v -> {
-            Intent intent=new Intent(home.this,report.class);
+            Intent intent=new Intent(home.this,ReportChildDashboard.class);
             startActivity(intent);
         });
         //chatbot

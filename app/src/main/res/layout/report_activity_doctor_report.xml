@@ -1,0 +1,111 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Report Details -->
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/childName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/disorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/doctorName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/therapiesCompleted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/therapiesMissed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/activitiesCompleted"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/activitiesMissed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/testsResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/clinicalObservation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- EditText for Doctor's Note -->
+        <EditText
+            android:id="@+id/editDoctorNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Doctor's Note"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            android:minHeight="100dp"
+            android:background="@drawable/edit_text_background"/>
+
+        <!-- Publish Button for Doctor's Note -->
+        <Button
+            android:id="@+id/publishNoteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Publish Note"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+</ScrollView>

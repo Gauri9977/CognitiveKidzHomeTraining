@@ -34,6 +34,12 @@
     <color name="textcolour4">#3949AB</color>
     <color name="black3">#212121</color>
 
+    <!-- Report -->
+    <color name="teal">#FF018786</color>
+    <color name="cream">#F7E6CD</color>
+    <color name="purple">#680C6E</color>
+    <color name="text_black">#000000</color>
+    <color name="text_white">#FFFFFF</color>
 
 </resources>
 

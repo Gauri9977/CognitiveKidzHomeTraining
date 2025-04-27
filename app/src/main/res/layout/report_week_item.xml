@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/weekNumberText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Week of [date]"
+        android:textSize="16sp"
+        android:textColor="#000000" />
+
+    <Button
+        android:id="@+id/viewReportButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Report" />
+</LinearLayout>
