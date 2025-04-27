@@ -81,5 +81,10 @@ public class dr_home extends AppCompatActivity {
             startActivity(intent);
         });
 
+        //Doctorside report
+        report.setOnClickListener(v -> {
+            Intent intent=new Intent(dr_home.this,ReportDoctorDashboardActivity.class);
+            startActivity(intent);
+        });
     }
 }

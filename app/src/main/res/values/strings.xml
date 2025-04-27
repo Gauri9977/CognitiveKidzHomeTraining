@@ -21,5 +21,31 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
+    <string name="name" />
+    <string name="age" />
+    <string name="disorder" />
+    <string name="doctor" />
+    <string name="note" />
+    <string name="doctor_s_note" />
+    <string name="progress_score" />
+    <string name="performance_score" />
+    <string name="observation" />
+    <string name="clinical_observation" />
+    <string name="tests_results1" />
+    <string name="tests_results" />
+    <string name="missed" />
+    <string name="completed" />
+    <string name="activities" />
+    <string name="therapies_missed" />
+    <string name="therapies_completed" />
+    <string name="therapy_details" />
+    <string name="therapy_label">Therapy Details</string>
+    <string name="activities_label">Activities</string>
+    <string name="tests_label">Test Results</string>
+    <string name="clinical_label">Clinical Observation</string>
+    <string name="performance_label">Performance Chart</string>
+    <string name="progress_label">Progress Chart</string>
+    <string name="note_label">Doctor\'s Note</string>
+    <string name="note_hint">Enter notes here…</string>
 
 </resources>
