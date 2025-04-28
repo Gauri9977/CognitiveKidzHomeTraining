@@ -6,71 +6,86 @@
     android:padding="16dp">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <!-- Title -->
         <TextView
-            android:text="Comprehensive Child Developmental Disabilities Form"
-            android:textStyle="bold"
-            android:textSize="22sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="12dp"
-            android:textColor="#2196F3" />
+            android:text="Comprehensive Child Developmental Disabilities Form"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <!-- Section: Child Information -->
         <TextView
-            android:text="Child Information"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:background="#2196F3"
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
+            android:background="#2196F3"
+            android:padding="8dp"
+            android:text="Child Information"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <!-- Name -->
         <TextView
-            android:text="1. Name"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="1. Name"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:hint="Enter child's name"
-            android:background="@android:drawable/edit_text"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"/>
+            android:hint="Enter child's name" />
 
         <!-- DOB -->
-        <TextView android:text="2. Date of Birth" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="2. Date of Birth"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/dob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:hint="MM/DD/YYYY"
-            android:focusable="false"
-            android:background="@android:drawable/edit_text"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"/>
+            android:clickable="true"
+            android:focusable="true"
+            android:hint="DD/MM/YYYY"
+            android:inputType="date" />
 
         <!-- Gender -->
-        <TextView android:text="3. Gender" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" />
-        <RadioGroup android:id="@+id/genderGroup" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <RadioButton android:id="@+id/male" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Male" />
-            <RadioButton android:id="@+id/female" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Female" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="3. Gender"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/genderGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female" />
         </RadioGroup>
 
         <!-- Diagnosis -->
@@ -81,6 +96,13 @@
             android:text="4. Diagnosis (Done by the Doctor)"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/diagnosis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter diagnosis" />
+
+        <!-- Developmental Disability Type -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,132 +110,370 @@
             android:text="5. Developmental Disability Type"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/diagnosis"
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/autism"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:hint="Enter diagnosis"
-            android:background="@android:drawable/edit_text"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"/>
+            android:text="Autism" />
 
-        <!-- Developmental Disability Type -->
-        <CheckBox android:id="@+id/autism" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Autism" android:textSize="16sp"/>
-        <CheckBox android:id="@+id/adhd" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="ADHD/ADD" android:textSize="16sp"/>
-        <CheckBox android:id="@+id/learning" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Learning Disability" android:textSize="16sp"/>
-        <CheckBox android:id="@+id/intellectual" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Intellectual Disability" android:textSize="16sp"/>
+        <CheckBox
+            android:id="@+id/adhd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADHD/ADD" />
+
+        <CheckBox
+            android:id="@+id/learning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Learning Disability" />
+
+        <CheckBox
+            android:id="@+id/intellectual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Intellectual Disability" />
 
         <!-- Severity Level -->
-        <TextView android:text="6. Severity Level (Level-1 = Low, Level-4 = High)" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" />
-        <RadioGroup android:id="@+id/severityGroup" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <RadioButton android:id="@+id/mild" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mild (Level - 1)" />
-            <RadioButton android:id="@+id/moderate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Moderate (Level - 2)" />
-            <RadioButton android:id="@+id/severe" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Severe (Level - 3)" />
-            <RadioButton android:id="@+id/profound" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Profound (Level - 4)" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="6. Severity Level (Level-1 = Low, Level-4 = High)"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/severityGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/mild"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mild (Level - 1)" />
+
+            <RadioButton
+                android:id="@+id/moderate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Moderate (Level - 2)" />
+
+            <RadioButton
+                android:id="@+id/severe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Severe (Level - 3)" />
+
+            <RadioButton
+                android:id="@+id/profound"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profound (Level - 4)" />
         </RadioGroup>
 
         <!-- Behavioral Issues -->
-        <TextView android:text="7. Behavioral Issues" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7. Behavioral Issues"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/behavior"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:hint="Enter behavioral issues"
-            android:background="@android:drawable/edit_text"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"/>
+            android:hint="Enter behavioral issues" />
 
         <!-- Communication Level -->
-        <TextView android:text="8. Communication Level" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" />
-        <RadioGroup android:id="@+id/communicationGroup" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <RadioButton android:id="@+id/verbal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Verbal" />
-            <RadioButton android:id="@+id/nonverbal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Non-verbal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="8. Communication Level"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/communicationGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/verbal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Verbal" />
+
+            <RadioButton
+                android:id="@+id/nonverbal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Non-verbal" />
         </RadioGroup>
 
         <!-- Activities of Daily Living -->
-        <TextView android:text="9. Activities of Daily Living" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" />
-        <RadioGroup android:id="@+id/activitiesGroup" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <RadioButton android:id="@+id/doneByChild" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Done by the child himself/herself" />
-            <RadioButton android:id="@+id/needsHelp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Needs help" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="9. Activities of Daily Living"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/activitiesGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/doneByChild"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Done by the child himself/herself" />
+
+            <RadioButton
+                android:id="@+id/needsHelp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Needs help" />
         </RadioGroup>
 
         <!-- Section: Parent/Guardian Information -->
         <TextView
-            android:text="Parent/Guardian Information"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#FFFFFF"
-            android:background="#2196F3"
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:background="#2196F3"
+            android:padding="8dp"
+            android:text="Parent/Guardian Information"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <!-- Parent/Guardian Name -->
-        <TextView android:text="1. Parent/Guardian Name(s)" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Parent/Guardian Name(s)"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/parentName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:hint="Enter name(s)"
-            android:background="@android:drawable/edit_text"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"/>
+            android:hint="Enter name(s)" />
 
         <!-- Relationship to Child -->
-        <TextView android:text="2. Relationship to Child" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. Relationship to Child"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/relationship"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:hint="e.g. Father, Mother"
-            android:background="@android:drawable/edit_text"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"/>
+            android:hint="e.g. Father, Mother" />
 
         <!-- Contact Information -->
-        <TextView android:text="3. Contact Information (Phone Number, Email ID)" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3. Contact Information (Phone Number, Email ID)"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/contactInfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:padding="12dp"
-            android:hint="Phone / Email"
-            android:background="@android:drawable/edit_text"
-            android:textColor="#000000"
-            android:textSize="16sp"
-            android:inputType="phone|textEmailAddress"
-            android:layout_marginBottom="8dp"/>
+            android:hint="Phone / Email" />
 
         <!-- Relationship Status -->
-        <TextView android:text="4. Relationship Status" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" />
-        <RadioGroup android:id="@+id/relationshipStatusGroup" android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
-            <RadioButton android:id="@+id/married" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Married" />
-            <RadioButton android:id="@+id/single" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Single" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="4. Relationship Status"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/relationshipStatusGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/married"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Married" />
+
+            <RadioButton
+                android:id="@+id/unmarried"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Unmarried" />
+
+            <RadioButton
+                android:id="@+id/divorced"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Divorced" />
         </RadioGroup>
+
+        <!-- Address -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5. Address"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter address" />
+
+        <!-- Primary Caregiver Details -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6. Primary Caregiver Details (Name, Contact, Relation to child etc.)"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/caregiverDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter caregiver details" />
+        <!-- Section: Developmental Milestones -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2196F3"
+            android:padding="8dp"
+            android:text="Developmental Milestones"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <!-- Developmental Milestones-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Milestones achieved in detail(e.g. crawling, walking, first words)"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/developmentDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter developmental milestones details" />
+
+        <!-- Section: functional Assessment -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2196F3"
+            android:padding="8dp"
+            android:text="Functional Assessment"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <!-- Functional Assessment-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Mobility (e.g. walking independently, using mobility aids)"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/functionalAssessmentDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter details" />
+
+        <!-- Section: Additional Details -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2196F3"
+            android:padding="8dp"
+            android:text="Additional Details"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Brief Description of Child's Daily Routine and Challenges"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/dailyRoutine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter details" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. Any Recent Medical History or Hospitalizations"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/medicalHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter details" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3. Previous Therapies/Interventions And their Outcomes"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/previousTherapies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter details " />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4. Current Medications and Dosages"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/medicationsDosages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter details" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5. Behavioral Observations regarding the child"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/behavioralObservations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter details" />
 
         <!-- Submit Button -->
         <Button
-            android:text="Submit"
-            android:layout_width="wrap_content"
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:backgroundTint="#2196F3"
-            android:textColor="#FFFFFF"
-            android:padding="12dp"
-            android:layout_gravity="center" />
+            android:text="Submit"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 </ScrollView>

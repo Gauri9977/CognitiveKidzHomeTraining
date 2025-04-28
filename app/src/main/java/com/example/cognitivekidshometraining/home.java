@@ -30,6 +30,7 @@ public class home extends AppCompatActivity {
 
         LinearLayout todolayout= findViewById(R.id.todo_linear_layout);
         LinearLayout activity_linear_layout=findViewById(R.id.activity_linear_layout);
+        LinearLayout academic_linear_layout=findViewById(R.id.academic_linear_layout);
         LinearLayout consultation=findViewById(R.id.consultation_linear_layout);
         LinearLayout rewards=findViewById(R.id.reward_linear_layout);
         LinearLayout report=findViewById(R.id.weeklyreport_linear_layout);
@@ -61,8 +62,13 @@ public class home extends AppCompatActivity {
             Intent intent = new Intent(home.this, todo.class);
             startActivity(intent);
         });
-        //academic activity
+        //activity
         activity_linear_layout.setOnClickListener(v -> {
+            Intent intent = new Intent(home.this, academic_activity.class);
+            startActivity(intent);
+        });
+        //academic activity
+        academic_linear_layout.setOnClickListener(v -> {
             Toast.makeText(home.this, "Academic Activities will be available soon. Stay tuned!", Toast.LENGTH_SHORT).show();
 
             // Uncomment below lines once feature is ready
@@ -79,9 +85,9 @@ public class home extends AppCompatActivity {
             Intent intent=new Intent(home.this, rewards.class);
             startActivity(intent);
         });
-        //Child report
+        //report
         report.setOnClickListener(v -> {
-            Intent intent=new Intent(home.this,ReportChildDashboard.class);
+            Intent intent=new Intent(home.this,report.class);
             startActivity(intent);
         });
         //chatbot

@@ -87,8 +87,8 @@ public class DrawerFragment extends Fragment {
         });
         // about_us
         //about_us.setOnClickListener(v ->{
-            //Intent intent = new Intent(getActivity(), about_us_old.class);
-            //startActivity(intent);
+        //Intent intent = new Intent(getActivity(), about_us_old.class);
+        //startActivity(intent);
         //});
 
         return view;
