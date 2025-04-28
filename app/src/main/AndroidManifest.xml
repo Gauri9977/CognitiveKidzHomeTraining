@@ -53,7 +53,8 @@
             />
         <activity
             android:name=".dr_home"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar" />
         <activity
             android:name=".myActivity"
             android:exported="false"
@@ -73,6 +74,7 @@
             android:name=".rewards"
             android:exported="false"
             android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar" />
+        <activity android:name=".webview" />
         <activity
             android:name=".academic_activity"
             android:exported="false"
@@ -168,26 +170,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <!-- Report related activities start here -->
-        <!-- Child Dashboard -->
-        <activity
-            android:name=".ReportChildDashboard"
-            android:exported="true" />
-
-        <!-- Doctor Dashboard -->
-        <activity
-            android:name=".ReportDoctorDashboardActivity"
-            android:exported="true" />
-
-        <!-- Report Viewer / Editor -->
-        <activity
-            android:name=".ReportActivity"
-            android:exported="true" />
-
-        <activity android:name=".ReportDoctorReportActivity" android:exported="true" />
-
-        <!-- Report related activities start here -->
-
     </application>
 
 </manifest>

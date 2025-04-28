@@ -131,12 +131,14 @@ public class login extends AppCompatActivity {
 
                         Toast.makeText(login.this, "Login Successful!", Toast.LENGTH_SHORT).show();
 
-                        if (email.equalsIgnoreCase("nchavan00@gmail.com")) {
-                            startActivity(new Intent(login.this, dr_home.class));
-                        } else {
+                        if (email.equals("nchavan00@gmail.com")) {
+                            Intent intent=new Intent(login.this, dr_home.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                        }
+                        else {
                             startActivity(new Intent(login.this, home.class));
                         }
-
                         finish();
                         break;
                     }
