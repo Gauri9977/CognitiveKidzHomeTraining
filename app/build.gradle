@@ -1,6 +1,6 @@
 plugins {
     id("com.android.application")
-    id("com.google.gms.google-services") // Firebase plugin
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -75,6 +75,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.3.0'
+
+    // Google Calendar API dependencies
+    //implementation 'com.google.api-client:google-api-client-android:1.33.0'
+    //implementation 'com.google.apis:google-api-services-calendar:v3-rev305-1.25.0'
+    //implementation 'com.google.oauth-client:google-oauth-client-jetty:1.33.0'
 }
 
 // Fix for 'testClasses' missing issue

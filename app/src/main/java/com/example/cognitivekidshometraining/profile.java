@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,9 +25,9 @@ public class profile extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference childrenRef, usersRef;
+    private DatabaseReference mDatabase;
 
     private static final String TAG = "ProfileActivity";
-    int childAge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,11 @@ public class profile extends AppCompatActivity {
 
         // Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         childrenRef = database.getReference("children");
-        usersRef = database.getReference("users");
+        usersRef = database.getReference("Users");
 
         // Bind Views
         etName = findViewById(R.id.etName);
@@ -52,9 +56,49 @@ public class profile extends AppCompatActivity {
         tvDisorder = findViewById(R.id.tvDisorder);
 
         // Load user data
-        loadProfileData();
+//        loadProfileData();
+        loadUserData();
     }
 
+    private void loadUserData() {
+        String userId = mAuth.getCurrentUser().getUid();
+        String userEmail = mAuth.getCurrentUser().getEmail(); // <-- Get email from auth
+
+        tvEmail.setText("Email: " + userEmail);
+
+        mDatabase.child("Users").child(userId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+//                            String username = snapshot.child("username").getValue(String.class);
+//                            String field1 = snapshot.child("formData").child("field1").getValue(String.class);
+//                            String field2 = snapshot.child("formData").child("field2").getValue(String.class);
+//
+//                            usernameText.setText("Username: " + username);
+//                            field1Text.setText("Field 1: " + field1);
+//                            field2Text.setText("Field 2: " + field2);
+
+                            etName.setText(snapshot.child("username").getValue(String.class));
+                            tvBirthDate.setText("Birth Date: " + snapshot.child("ChildData").child("dob").getValue(String.class));
+                            tvGender.setText("Gender: " + snapshot.child("ChildData").child("gender").getValue(String.class));
+//                            tvEmail.setText("Email ID: " + snapshot.child("ChildData").child("email").getValue(String.class));
+
+                            String dob = snapshot.child("ChildData").child("dob").getValue(String.class); // Example: "27/04/2020"
+                            String ageString = calculateAgeString(dob);
+                            tvAge.setText("Age: " + ageString);
+
+                            tvCity.setText("Address: " + snapshot.child("ChildData").child("address").getValue(String.class));
+                            tvDoctor.setText("Diagnosis: " + snapshot.child("ChildData").child("diagnosis").getValue(String.class));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(profile.this, "Failed to load data", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 
     private void loadProfileData() {
         String userId = mAuth.getCurrentUser().getUid();
@@ -62,7 +106,7 @@ public class profile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    etName.setText(snapshot.child("username").getValue(String.class));
+                    etName.setText(snapshot.child("parent_name").getValue(String.class));
 //                    tvPhone.setText(snapshot.child("phone").getValue(String.class));
                     tvBirthDate.setText("Birth Date: " + snapshot.child("dob").getValue(String.class));
 //                    tvAge.setText("Age: " + childAge);
