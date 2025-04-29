@@ -11,9 +11,12 @@ import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cognitivekidshometraining.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.SignInMethodQueryResult;  // Correct import
 import com.google.firebase.database.*;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -24,7 +27,10 @@ public class registration extends AppCompatActivity {
     private static final String PREFS_NAME = "CognitivePrefs";
     private static final String CONSENT_ACCEPTED_KEY = "consentAccepted";
 
-    private FirebaseAuth mAuth;  // Firebase Auth Instance
+    private FirebaseAuth mAuth;
+    FirebaseDatabase database;
+    DatabaseReference usersRef;// Firebase Auth Instance
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +42,10 @@ public class registration extends AppCompatActivity {
         }
 
         mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth
+
+        database = FirebaseDatabase.getInstance();
+        usersRef = database.getReference("Users");
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         nameEditText = findViewById(R.id.name);
         emailEditText = findViewById(R.id.emaiL);
@@ -99,18 +109,79 @@ public class registration extends AppCompatActivity {
             return;
         }
 
-        // Step 3: Check if the email is already registered with Firebase
-        // Firebase user registration (if not already done)
+//        saveUserToFirebase(name, email, password);
+
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, authTask -> {
-                    if (authTask.isSuccessful()) {
-                        proceedToFormPage(name, email, password);
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        String userId = mAuth.getCurrentUser().getUid();
+
+                        // Save Username to database
+                        mDatabase.child("Users").child(userId).child("username").setValue(name);
+                        mDatabase.child("Users").child(userId).child("email").setValue(email);
+                        mDatabase.child("Users").child(userId).child("password").setValue(password);
+
+                        // Move to Form Activity
+                        Intent i = new Intent(registration.this, form.class);
+                        i.putExtra("username", name);
+                        i.putExtra("email", email);
+                        i.putExtra("password", password);
+                        startActivity(i);
+                        finish();
                     } else {
-                        Toast.makeText(this, "Email already registered. Try logging in.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Registration Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
+        // Step 3: Check if the email is already registered with Firebase
+        // Firebase user registration (if not already done)
+
+//        mAuth.createUserWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(this, authTask -> {
+//                    if (authTask.isSuccessful()) {
+//                        proceedToFormPage(name, email, password);
+//                    } else {
+//                        Toast.makeText(this, "Email already registered. Try logging in.", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
     }
+
+
+    private void saveUserToFirebase(String username, String email, String password) {
+        usersRef.orderByChild("email").equalTo(email)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (task.getResult().exists()) {
+                            Toast.makeText(registration.this, "Email already registered", Toast.LENGTH_SHORT).show();
+                        } else {
+                            User user = new User(username, email, password);
+
+//                            String userId = usersRef.push().getKey(); // Create a unique ID
+//                            usersRef.child(userId).setValue(user)
+                            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            usersRef.child(uid).setValue(user)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(registration.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+
+                                        Intent i = new Intent(registration.this, form.class);
+                                        i.putExtra("username", username);
+                                        i.putExtra("email", email);
+                                        i.putExtra("password", password);
+                                        startActivity(i);
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(registration.this, "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    });
+                        }
+                    } else {
+                        Toast.makeText(registration.this, "Failed to check email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 
     // Method to navigate to the next page (form activity) if the email is new
     private void proceedToFormPage(String name, String email, String password) {

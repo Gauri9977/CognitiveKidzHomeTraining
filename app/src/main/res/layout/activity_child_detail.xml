@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/skin"
-    tools:context=".child_detail">
+    tools:context=".child_detail"
+    android:id="@+id/main">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -47,7 +48,9 @@
                     android:textColor="@color/textcolour"
                     android:textSize="26dp"
                     android:textStyle="bold" />
+
                 <TextView
+                    android:id="@+id/mobile_no_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="+91 - 8623812780"
@@ -57,7 +60,6 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_gravity="center"
-                    android:id="@+id/tvPhone"
                     />
 
 
@@ -76,15 +78,7 @@
                         android:padding="15dp">
 
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:padding="5dp"
-                            android:text="Reg. No: 019/24 "
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-
-                        <TextView
+                            android:id="@+id/dob_tv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -94,6 +88,7 @@
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/age_tv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -102,8 +97,8 @@
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
-
                         <TextView
+                            android:id="@+id/gender_tv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -111,16 +106,9 @@
                             android:text="Gender: Male"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:padding="5dp"
-                            android:text="Email-ID: arunajagtap04@gmail.com"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/city_tv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -130,24 +118,28 @@
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/parent_tv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:padding="5dp"
-                            android:text="Doctor: Dr. Nitin Chavan"
+                            android:text="Parent: Dr. Shreeganesh Patil"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
                         <TextView
+                            android:id="@+id/care_tv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:padding="5dp"
-                            android:text="Paediatrician: Dr. Shreeganesh Patil"
+                            android:text="Care Give: Dr. Nitin Chavan"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
 
+
                         <TextView
+                            android:id="@+id/diagnosis_tv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"

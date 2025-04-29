@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -17,13 +18,30 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cognitivekidshometraining.Model.Child;
+import com.example.cognitivekidshometraining.adapter.ChildrenAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class dr_child_list extends AppCompatActivity {
-
     Toolbar toolbar;
     TextView toolbar_title;
     ImageView toolbar_left_image;
     ActionBarDrawerToggle toggle;
+
+    private RecyclerView recyclerView;
+    private List<Child> childrenList = new ArrayList<>();
+    private ChildrenAdapter adapter;
+
+    private DatabaseReference usersRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +67,38 @@ public class dr_child_list extends AppCompatActivity {
 
         toggle.syncState();
 
-        Button viewdetail1=findViewById(R.id.viewDetails1);
 
-        viewdetail1.setOnClickListener(v -> {
-            Intent intent = new Intent(dr_child_list.this, child_detail.class);
-            startActivity(intent);
+        recyclerView = findViewById(R.id.childrenRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new ChildrenAdapter(this, childrenList, child -> {
+            // Handle View button click
+            Toast.makeText(this, "Viewing " + child.name, Toast.LENGTH_SHORT).show();
+            // You can also navigate to a detailed activity
+        });
+
+        recyclerView.setAdapter(adapter);
+
+        usersRef = FirebaseDatabase.getInstance().getReference("Users");
+        loadChildrenData();
+    }
+
+    private void loadChildrenData() {
+        usersRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
+                    String uid = userSnapshot.getKey();
+                    String name = userSnapshot.child("ChildData/child_name").getValue(String.class);
+                    String disorder = userSnapshot.child("ChildData/disability_type").getValue(String.class);
+
+                    if (name != null) {
+                        childrenList.add(new Child(uid, name, disorder != null ? disorder : "Not specified"));
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            } else {
+                Toast.makeText(this, "Failed to load data", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }

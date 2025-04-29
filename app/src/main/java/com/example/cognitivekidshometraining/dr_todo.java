@@ -20,6 +20,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +32,7 @@ import java.util.Map;
 public class dr_todo extends AppCompatActivity {
 
     Toolbar toolbar;
-    TextView toolbar_title;
+    TextView toolbar_title, disorder_tv;
     ImageView toolbar_left_image;
     ActionBarDrawerToggle toggle;
 
@@ -50,6 +55,9 @@ public class dr_todo extends AppCompatActivity {
 
     CheckBox checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, checkbox6, checkbox7, checkbox8, checkbox9;
 
+    private DatabaseReference usersRef;
+    private Map<String, String> childUidMap = new HashMap<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +65,11 @@ public class dr_todo extends AppCompatActivity {
 
         spinnerChildName = findViewById(R.id.spinnerChildName);
         spinnerDisorder = findViewById(R.id.spinnerDisorder);
+        disorder_tv = findViewById(R.id.disorder_tv);
+
+        usersRef = FirebaseDatabase.getInstance().getReference("Users");
+
+        fetchChildren();
 
         // Child Name Spinner data
 
@@ -79,9 +92,9 @@ public class dr_todo extends AppCompatActivity {
         toggle.syncState();
 
 
-        ArrayAdapter<String> childAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, childNames);
-        childAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerChildName.setAdapter(childAdapter);
+//        ArrayAdapter<String> childAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, childNames);
+//        childAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerChildName.setAdapter(childAdapter);
 
         // Set adapter for Disorder Spinner
         ArrayAdapter<String> disorderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, disorders);
@@ -101,17 +114,17 @@ public class dr_todo extends AppCompatActivity {
             }
         });
 
-        spinnerDisorder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedDisorder = parent.getItemAtPosition(position).toString();
-                Toast.makeText(dr_todo.this, "Selected Disorder: " + selectedDisorder, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+//        spinnerDisorder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String selectedDisorder = parent.getItemAtPosition(position).toString();
+//                Toast.makeText(dr_todo.this, "Selected Disorder: " + selectedDisorder, Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//            }
+//        });
 
 
         checkbox1 = findViewById(R.id.checkbox1);
@@ -157,5 +170,55 @@ public class dr_todo extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void fetchChildren() {
+        usersRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                List<String> childNames = new ArrayList<>();
+
+                for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
+                    String uid = userSnapshot.getKey();
+                    String name = userSnapshot.child("ChildData/child_name").getValue(String.class);
+
+                    if (name != null) {
+                        childNames.add(name);
+                        childUidMap.put(name, uid); // Store mapping
+                    }
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, childNames);
+                spinnerChildName.setAdapter(adapter);
+
+                spinnerChildName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        String selectedName = parent.getItemAtPosition(position).toString();
+                        String uid = childUidMap.get(selectedName);
+                        fetchDisorderForChild(uid);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {}
+                });
+
+            } else {
+                Toast.makeText(this, "Failed to load children", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void fetchDisorderForChild(String uid) {
+        usersRef.child(uid).child("ChildData").child("disability_type")
+                .get().addOnSuccessListener(snapshot -> {
+                    String disorder = snapshot.getValue(String.class);
+                    if (disorder != null) {
+                        disorder_tv.setText("Disorder: " + disorder);
+                    } else {
+                        disorder_tv.setText("Disorder: Not specified");
+                    }
+                }).addOnFailureListener(e -> {
+                    disorder_tv.setText("Error fetching disorder");
+                });
     }
 }

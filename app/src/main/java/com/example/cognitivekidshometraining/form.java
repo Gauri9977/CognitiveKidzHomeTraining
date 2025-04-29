@@ -8,24 +8,26 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class form extends AppCompatActivity {
+    String name;
+    String email;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form); // Set the layout for this activity
+        setContentView(R.layout.activity_form);
 
-        // Find the "Fill Form" button by its ID
         Button btnFillForm = findViewById(R.id.btnFillForm);
-        Bundle extra = getIntent().getExtras();
-        String name = extra.getString("username");
-        String email = extra.getString("email");
-        String password = extra.getString("password");
-        // When the button is clicked, navigate to the new activity where the form will be loaded
-        btnFillForm.setOnClickListener(v -> {
-            // Create an intent to navigate to the new activity
-//            Intent intent = new Intent(form.this, FormWebViewActivity.class);
-//            startActivity(intent); // Start the new activity
 
+        Bundle extra = getIntent().getExtras();
+        assert extra != null;
+        if (!extra.isEmpty()){
+            name = extra.getString("username");
+            email = extra.getString("email");
+            password = extra.getString("password");
+        }
+
+        btnFillForm.setOnClickListener(v -> {
             Intent i = new Intent(form.this, GoogleForm.class);
             i.putExtra("username", name);
             i.putExtra("email", email);

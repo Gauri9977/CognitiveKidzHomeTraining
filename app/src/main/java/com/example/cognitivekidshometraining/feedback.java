@@ -17,6 +17,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class feedback extends AppCompatActivity {
 
     private EditText experienceInput, suggestionInput;
@@ -27,11 +34,16 @@ public class feedback extends AppCompatActivity {
     private ImageView toolbarLeftImage;
     private ActionBarDrawerToggle toggle;
     private DrawerLayout drawerLayout;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feedback);
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         initializeViews();
         setupToolbar();
@@ -85,20 +97,44 @@ public class feedback extends AppCompatActivity {
                 else if (rating >= 3.0f) message = "Good! We will try to improve.";
                 else message = "Thank you for your input.";
 
+                String rateScore = Float.toString(rating);
+
                 showThankYouDialog(message);
+                submitFeedback(experience, suggestion, rateScore);
             }
         });
     }
 
+    private void submitFeedback(String experience, String suggestion, String rateScore) {
+        String userId = mAuth.getCurrentUser().getUid();
+
+        Map<String, String> feedbackData = new HashMap<>();
+        feedbackData.put("experience", experience);
+        feedbackData.put("suggestion", suggestion);
+        feedbackData.put("rating", rateScore);
+
+        mDatabase.child("Users").child(userId).child("feedback").setValue(feedbackData)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+//                        Toast.makeText(feedback.this, "Feedback submitted successfully", Toast.LENGTH_SHORT).show();
+//                        finish(); // close the feedback screen
+                    } else {
+//                        Toast.makeText(feedback.this, "Failed to submit feedback", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     private void showThankYouDialog(String message) {
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Thank You!")
                 .setMessage(message + "\n\nYour feedback has been submitted.")
-                .setPositiveButton("OK", (dialog, id) -> {
-                    dialog.dismiss();
+                .setCancelable(false)
+                .setPositiveButton("OK", (dialogInterface, id) -> {
+                    dialogInterface.dismiss();
                     finish();
                 })
-                .create()
-                .show();
+                .create();
+
+        dialog.show();
     }
 }
