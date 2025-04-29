@@ -48,12 +48,10 @@ public class consultation extends AppCompatActivity {
         toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
         toolbar_title.setText("Consultation");
         toolbar_left_image.setVisibility(View.GONE);
-
         DrawerLayout drawer = findViewById(R.id.consult_drawer);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         // Fragment drawer
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();

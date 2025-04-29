@@ -7,86 +7,150 @@
     android:id="@+id/dr_activity_page"
     android:background="@color/skin"
     android:layout_gravity="center"
-    tools:context=".dr_home">
+    tools:context=".dr_activities">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        >
+        android:padding="16dp">
         <include layout="@layout/toolbar"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Assign Therapy"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/textcolour"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/appointmentDetailsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@android:color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time: "
+                android:textStyle="bold"
+                android:paddingEnd="8dp"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/etAppointmentTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="HH:MM"
+                android:focusable="false"
+                android:inputType="time"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="*"
-            android:padding="16dp">
+            android:stretchColumns="*">
 
-            <!-- Table Header -->
             <TableRow>
                 <TextView
                     android:text="Time"
                     android:textStyle="bold"
-                    android:padding="8dp"/>
+                    android:padding="8dp"
+                    tools:ignore="HardcodedText" />
                 <TextView
                     android:text="Child Name"
                     android:textStyle="bold"
-                    android:padding="8dp"/>
+                    android:padding="8dp"
+                    tools:ignore="HardcodedText" />
                 <TextView
                     android:text="Therapist"
                     android:textStyle="bold"
-                    android:padding="8dp"/>
-            </TableRow>
-
-            <!-- Table Rows -->
-            <TableRow>
-                <TextView android:text="9:00 AM - 10:00 AM" android:padding="8dp"/>
-                <TextView android:text="Aarav" android:padding="8dp"/>
-                <TextView android:text="Dr. Mehta" android:padding="8dp"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView android:text="10:00 AM - 11:00 AM" android:padding="8dp"/>
-                <TextView android:text="Anaya" android:padding="8dp"/>
-                <TextView android:text="Dr. Patel" android:padding="8dp"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView android:text="11:00 AM - 12:00 PM" android:padding="8dp"/>
-                <TextView android:text="Vihaan" android:padding="8dp"/>
-                <TextView android:text="Dr. Shah" android:padding="8dp"/>
+                    android:padding="8dp"
+                    tools:ignore="HardcodedText" />
+                <TextView
+                    android:text="Activity Type"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    tools:ignore="HardcodedText" />
+                <TextView
+                    android:text="Notes"
+                    android:textStyle="bold"
+                    android:padding="8dp"
+                    tools:ignore="HardcodedText" />
             </TableRow>
 
             <TableRow>
-                <TextView android:text="12:00 PM - 1:00 PM" android:padding="8dp"/>
-                <TextView android:text="Myra" android:padding="8dp"/>
-                <TextView android:text="Dr. Mehta" android:padding="8dp"/>
+                <TextView
+                    android:id="@+id/time1"
+                    android:text="Select Time"
+                    android:padding="8dp"
+                    tools:ignore="HardcodedText" />
+                <Spinner
+                    android:id="@+id/childNameSpinner1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Spinner
+                    android:id="@+id/therapistSpinner1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <Spinner
+                    android:id="@+id/activityTypeSpinner1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <EditText
+                    android:id="@+id/notesEditText1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Optional notes"
+                    tools:ignore="HardcodedText" />
             </TableRow>
-
-            <TableRow>
-                <TextView android:text="1:00 PM - 2:00 PM" android:padding="8dp"/>
-                <TextView android:text="Ishaan" android:padding="8dp"/>
-                <TextView android:text="Dr. Shah" android:padding="8dp"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView android:text="2:00 PM - 3:00 PM" android:padding="8dp"/>
-                <TextView android:text="Siya" android:padding="8dp"/>
-                <TextView android:text="Dr. Patel" android:padding="8dp"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView android:text="3:00 PM - 4:00 PM" android:padding="8dp"/>
-                <TextView android:text="Kabir" android:padding="8dp"/>
-                <TextView android:text="Dr. Mehta" android:padding="8dp"/>
-            </TableRow>
-
-            <TableRow>
-                <TextView android:text="4:00 PM - 5:00 PM" android:padding="8dp"/>
-                <TextView android:text="Tanya" android:padding="8dp"/>
-                <TextView android:text="Dr. Shah" android:padding="8dp"/>
-            </TableRow>
-
         </TableLayout>
+
+        <Button
+            android:id="@+id/assignButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Assign Therapy"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/assignedTherapiesTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Assigned Therapies:"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/textcolour"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/assignedListTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/black"/>
 
     </LinearLayout>
     <include layout="@layout/fragment_drawer1"/>
