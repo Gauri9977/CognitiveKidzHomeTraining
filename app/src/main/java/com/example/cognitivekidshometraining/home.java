@@ -92,13 +92,7 @@ public class home extends AppCompatActivity {
         });
         //chatbot
         chatbot.setOnClickListener(v -> {
-            String meetUrl = "https://mk090311.github.io/MyBuddy/";
-
-            // Create an Intent to open the link in a browser
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(meetUrl));
-
-            // Start the activity with the intent
+            Intent intent = new Intent(home.this, ChatbotActivity.class);
             startActivity(intent);
         });
 
