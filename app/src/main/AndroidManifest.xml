@@ -191,6 +191,9 @@
         <!-- Chatbot -->
         <activity android:name=".ChatbotActivity" />
 
+        <!-- GameWebView -->
+        <activity android:name=".GameWebView" />
+
 
     </application>
 

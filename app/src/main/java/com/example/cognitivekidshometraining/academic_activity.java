@@ -40,6 +40,7 @@ public class academic_activity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         childName = snapshot.getValue(String.class);
                         if (childName != null) {
+                            // Check if activities are assigned for the child and set their state (locked or unlocked)
                             checkIfActivityAssigned("Counting Game", R.id.Counting_Game, R.id.Counting_Game_locked_overlay, "https://cognoappproject.github.io/Counting_Game/");
                             checkIfActivityAssigned("Learn Colors", R.id.LearnColors, R.id.LearnColors_locked_overlay, "https://cognoappproject.github.io/LearnColors/");
                             checkIfActivityAssigned("Shape Sorter", R.id.ShapeSorter, R.id.ShapeSorter_locked_overlay, "https://cognoappproject.github.io/ShapeSorter/");
@@ -97,7 +98,7 @@ public class academic_activity extends AppCompatActivity {
                     lockOverlay.setVisibility(View.GONE);
                     layout.setEnabled(true);
                     layout.setAlpha(1.0f);
-                    layout.setOnClickListener(v -> openWebLink(url));
+                    layout.setOnClickListener(v -> openWebLink(url, activityName));
                 } else {
                     lockOverlay.setVisibility(View.VISIBLE);
                     layout.setEnabled(false);
@@ -112,8 +113,12 @@ public class academic_activity extends AppCompatActivity {
         });
     }
 
-    private void openWebLink(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+    // Open web link using the GameWebView activity and pass necessary data
+    private void openWebLink(String url, String activityName) {
+        Intent intent = new Intent(academic_activity.this, GameWebView.class);
+        intent.putExtra("url", url);
+        intent.putExtra("child_name", childName); // Pass child name for Firebase
+        //intent.putExtra("activity_name", activityName);
         startActivity(intent);
     }
 }
