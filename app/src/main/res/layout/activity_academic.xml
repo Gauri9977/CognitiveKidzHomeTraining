@@ -31,7 +31,7 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- Task 1 -->
+                    <!-- Task 1 Counting_Game-->
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                             android:layout_gravity="center"
                             android:background="@color/skin"
                             android:padding="16dp"
-                            android:id="@+id/numbers"
+                            android:id="@+id/Counting_Game"
                             >
 
                             <TextView
@@ -63,25 +63,25 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Learn Numbers"
-                                android:id="@+id/number_game"
+                                android:text="Counting Numbers"
+                                android:id="@+id/Counting_Game_game"
                                 android:layout_gravity="center"
                                 android:textSize="18sp"
                                 android:textColor="@color/textcolour"
                                 android:paddingTop="8dp" />
 
                             <ImageView
-                                android:id="@+id/number_image"
+                                android:id="@+id/Counting_Game_image"
                                 android:layout_width="177sp"
                                 android:layout_height="159sp"
                                 android:layout_gravity="center"
-                                android:contentDescription="Learn Numbers Image"
+                                android:contentDescription="Counting_Game"
                                 android:paddingTop="12sp"
                                 android:src="@drawable/numbers" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-                    <!-- Task 2 -->
+                    <!-- Task 2 LearnColors-->
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                             android:orientation="vertical"
                             android:layout_gravity="center"
                             android:background="@color/skin"
-                            android:id="@+id/words"
+                            android:id="@+id/LearnColors"
                             android:padding="16dp">
 
                             <TextView
@@ -111,25 +111,258 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Learn Words"
-                                android:id="@+id/words_game"
+                                android:text="Learn Colors"
+                                android:id="@+id/LearnColors_game"
+                                android:layout_gravity="center"
+                                android:textSize="18sp"
+                                android:textColor="@color/textcolour"
+                                android:paddingTop="8dp" />
+
+                            <LinearLayout
+                                android:id="@+id/ShapeSorter"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@color/skin"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="Task 3 :"
+                                    android:textColor="@color/textcolour"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/ShapeSorter_game"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:paddingTop="8dp"
+                                    android:text="Shape Sorter"
+                                    android:textColor="@color/textcolour"
+                                    android:textSize="18sp" />
+
+                                <ImageView
+                                    android:id="@+id/ShapeSorter_image"
+                                    android:layout_width="177sp"
+                                    android:layout_height="159sp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="ShapeSorter"
+                                    android:paddingTop="12sp"
+                                    android:src="@drawable/colors" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Task 3 ShapeSorter-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        >
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Task 4 Sequencing_Tasks_Game-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:background="@color/skin"
+                            android:padding="16dp"
+                            android:id="@+id/Sequencing_Tasks_Game">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Task 4:"
+                                android:textColor="@color/textcolour"
+                                android:layout_gravity="center"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sequencing Tasks"
+                                android:id="@+id/Sequencing_Tasks_Game_game"
+                                android:layout_gravity="center"
+                                android:textSize="18sp"
+                                android:textColor="#000000"
+                                android:paddingTop="8dp" />
+
+                            <ImageView
+                                android:id="@+id/Sequencing_Tasks_Game_image"
+                                android:layout_width="177sp"
+                                android:layout_height="159sp"
+                                android:layout_gravity="center"
+                                android:contentDescription="Sequencing_Tasks_Game"
+                                android:paddingTop="12sp"
+                                android:src="@drawable/shapes" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Task 5 Color_Sorting_Game -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:background="@color/skin"
+                            android:padding="16dp"
+                            android:id="@+id/Color_Sorting_Game">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Task 5:"
+                                android:layout_gravity="center"
+                                android:textColor="@color/textcolour"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Color Sorting"
+                                android:id="@+id/Color_Sorting_Game_game"
                                 android:layout_gravity="center"
                                 android:textSize="18sp"
                                 android:textColor="@color/textcolour"
                                 android:paddingTop="8dp" />
 
                             <ImageView
-                                android:id="@+id/words_image"
+                                android:id="@+id/Color_Sorting_Game_image"
                                 android:layout_width="177sp"
                                 android:layout_height="159sp"
                                 android:layout_gravity="center"
-                                android:contentDescription="Learn Words Image"
+                                android:contentDescription="Color_Sorting_Game"
+                                android:paddingTop="12sp"
+                                android:src="@drawable/sequence" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Task 6 Number_Sequence_Game-->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:background="@color/skin"
+                            android:padding="16dp"
+                            android:id="@+id/Number_Sequence_Game"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Task 6 :"
+                                android:layout_gravity="center"
+                                android:textColor="@color/textcolour"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Number Sequence"
+                                android:id="@+id/Number_Sequence_Game_game"
+                                android:layout_gravity="center"
+                                android:textSize="18sp"
+                                android:textColor="@color/textcolour"
+                                android:paddingTop="8dp" />
+
+                            <ImageView
+                                android:id="@+id/Number_Sequence_Game_image"
+                                android:layout_width="177sp"
+                                android:layout_height="159sp"
+                                android:layout_gravity="center"
+                                android:contentDescription="Number_Sequence_Game"
+                                android:paddingTop="12sp"
+                                android:src="@drawable/numbers" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Task 7 WordBuilder -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_gravity="center"
+                            android:background="@color/skin"
+                            android:id="@+id/WordBuilder"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Task 7 :"
+                                android:layout_gravity="center"
+                                android:textColor="@color/textcolour"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Word Builder"
+                                android:id="@+id/WordBuilder_game"
+                                android:layout_gravity="center"
+                                android:textSize="18sp"
+                                android:textColor="@color/textcolour"
+                                android:paddingTop="8dp" />
+
+                            <ImageView
+                                android:id="@+id/WordBuilder_image"
+                                android:layout_width="177sp"
+                                android:layout_height="159sp"
+                                android:layout_gravity="center"
+                                android:contentDescription="WordBuilder_Image"
                                 android:paddingTop="12sp"
                                 android:src="@drawable/words" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-                    <!-- Task 3 -->
+                    <!-- Task 8 Reaction_Time_Tap_Game-->
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -145,12 +378,12 @@
                             android:layout_gravity="center"
                             android:background="@color/skin"
                             android:padding="16dp"
-                            android:id="@+id/colours">
+                            android:id="@+id/Reaction_Time_Tap_Game">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Task 3 :"
+                                android:text="Task 8 :"
                                 android:textColor="@color/textcolour"
                                 android:textSize="20sp"
                                 android:layout_gravity="center"
@@ -159,25 +392,25 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Learn Colors"
-                                android:id="@+id/colors_game"
+                                android:text="Reaction Time Tap"
+                                android:id="@+id/Reaction_Time_Tap_Game_game"
                                 android:layout_gravity="center"
                                 android:textSize="18sp"
                                 android:textColor="@color/textcolour"
                                 android:paddingTop="8dp" />
 
                             <ImageView
-                                android:id="@+id/colors_image"
+                                android:id="@+id/Reaction_Time_Tap_Game_image"
                                 android:layout_width="177sp"
                                 android:layout_height="159sp"
                                 android:layout_gravity="center"
-                                android:contentDescription="Learn Colors Image"
+                                android:contentDescription="Reaction_Time_Tap_Game"
                                 android:paddingTop="12sp"
                                 android:src="@drawable/colors" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-                    <!-- Task 4 -->
+                    <!-- Task 9 Bubble_Pop_Game-->
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -192,12 +425,12 @@
                             android:layout_gravity="center"
                             android:background="@color/skin"
                             android:padding="16dp"
-                            android:id="@+id/shapes">
+                            android:id="@+id/Bubble_Pop_Game">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Task 4:"
+                                android:text="Task 9:"
                                 android:textColor="@color/textcolour"
                                 android:layout_gravity="center"
                                 android:textSize="20sp"
@@ -206,25 +439,25 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Learn Shapes"
-                                android:id="@+id/shapes_game"
+                                android:text="Bubble Pop"
+                                android:id="@+id/Bubble_Pop_Game_game"
                                 android:layout_gravity="center"
                                 android:textSize="18sp"
                                 android:textColor="#000000"
                                 android:paddingTop="8dp" />
 
                             <ImageView
-                                android:id="@+id/shapes_image"
+                                android:id="@+id/Bubble_Pop_Game_image"
                                 android:layout_width="177sp"
                                 android:layout_height="159sp"
                                 android:layout_gravity="center"
-                                android:contentDescription="Learn Shapes Image"
+                                android:contentDescription="Bubble Pop Game"
                                 android:paddingTop="12sp"
                                 android:src="@drawable/shapes" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
-                    <!-- Task 5 -->
+                    <!-- Task 10 Memory_Card_Match-->
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -239,12 +472,12 @@
                             android:layout_gravity="center"
                             android:background="@color/skin"
                             android:padding="16dp"
-                            android:id="@+id/sequence">
+                            android:id="@+id/Memory_Card_Match">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Task 5:"
+                                android:text="Task 10:"
                                 android:layout_gravity="center"
                                 android:textColor="@color/textcolour"
                                 android:textSize="20sp"
@@ -253,26 +486,36 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Learn Sequence"
-                                android:id="@+id/sequnce_game"
+                                android:text="Memory Card Match"
+                                android:id="@+id/Memory_Card_Match_game"
                                 android:layout_gravity="center"
                                 android:textSize="18sp"
                                 android:textColor="@color/textcolour"
                                 android:paddingTop="8dp" />
 
                             <ImageView
-                                android:id="@+id/sequence_image"
+                                android:id="@+id/Memory_Card_Match_image"
                                 android:layout_width="177sp"
                                 android:layout_height="159sp"
                                 android:layout_gravity="center"
-                                android:contentDescription="Learn Seqeunce Image"
+                                android:contentDescription="Memory_Card_Match_image"
                                 android:paddingTop="12sp"
                                 android:src="@drawable/sequence" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
+
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/LearnColors_image"
+            android:layout_width="177sp"
+            android:layout_height="159sp"
+            android:layout_gravity="center"
+            android:contentDescription="LearnColors"
+            android:paddingTop="12sp"
+            android:src="@drawable/words" />
     </LinearLayout>
     <include layout="@layout/fragment_drawer"/>
 

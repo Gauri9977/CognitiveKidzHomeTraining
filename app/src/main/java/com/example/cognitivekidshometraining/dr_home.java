@@ -35,6 +35,8 @@ public class dr_home extends AppCompatActivity {
         LinearLayout child_details=findViewById(R.id.reward_linear_layout1);
         LinearLayout report=findViewById(R.id.weeklyreport_linear_layout1);
         LinearLayout dr_profile= findViewById(R.id.myactivity_home);
+        LinearLayout chatbot=findViewById(R.id.chatbot_linear_layout);
+
 
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
@@ -78,6 +80,12 @@ public class dr_home extends AppCompatActivity {
 
         child_details.setOnClickListener(v -> {
             Intent intent= new Intent(dr_home.this, dr_child_list.class);
+            startActivity(intent);
+        });
+
+        //chatbot
+        chatbot.setOnClickListener(v -> {
+            Intent intent = new Intent(dr_home.this, ChatbotActivity.class);
             startActivity(intent);
         });
 

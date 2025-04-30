@@ -16,41 +16,44 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ChildDetailActivity"
-            android:exported="false" />
-        <activity
             android:name=".dr_todo"
             android:exported="false"
-            android:theme="@style/Theme.toolbarNoACtionbar" />
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
         <activity
             android:name=".dr_profile"
             android:exported="false"
-            android:theme="@style/Theme.toolbarNoACtionbar" />
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
         <activity
             android:name=".dr_activities"
             android:exported="false"
-            android:theme="@style/Theme.toolbarNoACtionbar" />
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
         <activity android:name=".FormWebViewActivity" />
         <activity
             android:name=".GoogleForm"
             android:exported="false"
-            android:theme="@style/Theme.toolbarNoACtionbar" />
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
         <activity
             android:name=".child_detail"
             android:exported="false"
-            android:theme="@style/Theme.toolbarNoACtionbar" />
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
         <activity
             android:name=".dr_child_list"
             android:exported="false"
-            android:theme="@style/Theme.toolbarNoACtionbar" />
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
         <activity
             android:name=".dr_consult"
             android:exported="false"
-            android:theme="@style/Theme.toolbarNoACtionbar" />
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
         <activity
             android:name=".dr_home"
-            android:exported="false"
-            android:theme="@style/Theme.toolbarNoACtionbar" />
+            android:exported="false" />
         <activity
             android:name=".myActivity"
             android:exported="false"
@@ -70,7 +73,6 @@
             android:name=".rewards"
             android:exported="false"
             android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar" />
-        <activity android:name=".webview" />
         <activity
             android:name=".academic_activity"
             android:exported="false"
@@ -138,21 +140,24 @@
         <activity
             android:name=".registration"
             android:exported="false"
-            android:theme="@style/Theme.toolbarNoACtionbar">
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".login"
-            android:exported="false">
+            android:exported="false"
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -163,6 +168,30 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <!-- Report related activities start here -->
+        <!-- Child Dashboard -->
+        <activity
+            android:name=".ReportChildDashboard"
+            android:exported="true" />
+
+        <!-- Doctor Dashboard -->
+        <activity
+            android:name=".ReportDoctorDashboardActivity"
+            android:exported="true" />
+
+        <!-- Report Viewer / Editor -->
+        <activity
+            android:name=".ReportActivity"
+            android:exported="true" />
+
+        <activity android:name=".ReportDoctorReportActivity" android:exported="true" />
+
+        <!-- Report related activities end here -->
+
+        <!-- Chatbot -->
+        <activity android:name=".ChatbotActivity" />
+
+
     </application>
 
 </manifest>
