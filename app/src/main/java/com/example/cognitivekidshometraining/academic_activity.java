@@ -3,171 +3,117 @@ package com.example.cognitivekidshometraining;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.cognitivekidshometraining.databinding.ActivityAcademicBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.*;
 
 public class academic_activity extends AppCompatActivity {
-    Toolbar toolbar;
-    TextView toolbar_title;
-    ImageView toolbar_left_image;
-    ActionBarDrawerToggle toggle;
+
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private String childName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_academic);
 
-        toolbar = findViewById(R.id.toolbar);
-        toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
-        toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
-        toolbar_title.setText("Academic Activities");
-        toolbar_left_image.setVisibility(View.GONE);
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.drawer_frag, new DrawerFragment()).commit();
-
-        DrawerLayout drawer = findViewById(R.id.drawer_academic_activity);
-        toggle = new ActionBarDrawerToggle(academic_activity.this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
-        drawer.addDrawerListener(toggle);
-
-        toggle.setToolbarNavigationClickListener(v ->{});
-        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
-
-        toggle.syncState();
-
-        LinearLayout Counting_Game = findViewById(R.id.Counting_Game);
-        Counting_Game.setOnClickListener(v -> openWeb("https://cognoappproject.github.io/Counting_Game/"));
-
-        LinearLayout LearnColors = findViewById(R.id.LearnColors);
-        LearnColors.setOnClickListener(v -> openWeb("https://cognoappproject.github.io/LearnColors/"));
-
-        LinearLayout ShapeSorter = findViewById(R.id.ShapeSorter);
-        ShapeSorter.setOnClickListener(v -> openWeb("https://cognoappproject.github.io/ShapeSorter/"));
-
-        LinearLayout Sequencing_Tasks_Game = findViewById(R.id.Sequencing_Tasks_Game);
-        Sequencing_Tasks_Game.setOnClickListener(v -> openWeb("https://cognoappproject.github.io/Sequencing-Tasks-Game/"));
-
-        LinearLayout Color_Sorting_Game  = findViewById(R.id.Color_Sorting_Game);
-        Color_Sorting_Game.setOnClickListener(v -> openWeb("https://cognoappproject.github.io/Color-Sorting-Game/"));
-
-        LinearLayout Number_Sequence_Game  = findViewById(R.id.Number_Sequence_Game);
-        Number_Sequence_Game.setOnClickListener(v -> openWeb("https://cognoappproject.github.io/Number-Sequence-Game/"));
-
-        LinearLayout WordBuilder = findViewById(R.id.WordBuilder);
-        WordBuilder.setOnClickListener(v -> openWeb("https://cognoappproject.github.io/WordBuilder/"));
-
-        LinearLayout Reaction_Time_Tap_Game = findViewById(R.id.Reaction_Time_Tap_Game);
-        Reaction_Time_Tap_Game.setOnClickListener(v -> openWeb("https://cognoappproject.github.io/Reaction-Time-Tap-Game/"));
-
-        LinearLayout Bubble_Pop_Game = findViewById(R.id.Bubble_Pop_Game);
-        Bubble_Pop_Game.setOnClickListener(v -> openWeb("https://cognoappproject.github.io/Bubble-Pop-Game/"));
-
-        LinearLayout Memory_Card_Match = findViewById(R.id.Memory_Card_Match);
-        Memory_Card_Match.setOnClickListener(v -> openWeb("https://cognoappproject.github.io/Memory-Card-Match/"));
-
+        fetchChildNameAndCheckActivities();
     }
 
-    private void openWeb(String url) {
-        Intent intent = new Intent(this, webview.class);
-        intent.putExtra("url", url);
+    private void fetchChildNameAndCheckActivities() {
+        String uid = mAuth.getCurrentUser().getUid();
+
+        mDatabase.child("Users").child(uid).child("ChildData").child("child_name")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        childName = snapshot.getValue(String.class);
+                        if (childName != null) {
+                            checkIfActivityAssigned("Counting Game", R.id.Counting_Game, R.id.Counting_Game_locked_overlay, "https://cognoappproject.github.io/Counting_Game/");
+                            checkIfActivityAssigned("Learn Colors", R.id.LearnColors, R.id.LearnColors_locked_overlay, "https://cognoappproject.github.io/LearnColors/");
+                            checkIfActivityAssigned("Shape Sorter", R.id.ShapeSorter, R.id.ShapeSorter_locked_overlay, "https://cognoappproject.github.io/ShapeSorter/");
+                            checkIfActivityAssigned("Sequencing Tasks Game", R.id.Sequencing_Tasks_Game, R.id.Sequencing_Tasks_Game_locked_overlay, "https://cognoappproject.github.io/Sequencing-Tasks-Game/");
+                            checkIfActivityAssigned("Color Sorting Game", R.id.Color_Sorting_Game, R.id.Color_Sorting_Game_locked_overlay, "https://cognoappproject.github.io/Color-Sorting-Game/");
+                            checkIfActivityAssigned("Number Sequence Game", R.id.Number_Sequence_Game, R.id.Number_Sequence_Game_locked_overlay, "https://cognoappproject.github.io/Number-Sequence-Game/");
+                            checkIfActivityAssigned("Word Builder", R.id.WordBuilder, R.id.WordBuilder_locked_overlay, "https://cognoappproject.github.io/WordBuilder/");
+                            checkIfActivityAssigned("Reaction Time Tap Game", R.id.Reaction_Time_Tap_Game, R.id.Reaction_Time_Tap_Game_locked_overlay, "https://cognoappproject.github.io/Reaction-Time-Tap-Game/");
+                            checkIfActivityAssigned("Bubble Pop Game", R.id.Bubble_Pop_Game, R.id.Bubble_Pop_Game_locked_overlay, "https://cognoappproject.github.io/Bubble-Pop-Game/");
+                            checkIfActivityAssigned("Memory Card Match", R.id.Memory_Card_Match, R.id.Memory_Card_Match_locked_overlay, "https://cognoappproject.github.io/Memory-Card-Match/");
+                        } else {
+                            Toast.makeText(academic_activity.this, "Child name not found.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.e("AcademicActivity", "Failed to load child name: " + error.getMessage());
+                    }
+                });
+    }
+
+    private void checkIfActivityAssigned(String activityName, int layoutId, int lockOverlayId, String url) {
+        DatabaseReference actRef = mDatabase.child("AssignedActivities").child(childName);
+
+        actRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isAssigned = false;
+
+                for (DataSnapshot dateSnap : snapshot.getChildren()) {
+                    DataSnapshot onlineSnap = dateSnap.child("online");
+                    if (onlineSnap.exists()) {
+                        for (DataSnapshot activitySnap : onlineSnap.getChildren()) {
+                            String name = activitySnap.child("activity_name").getValue(String.class);
+                            Log.d("CheckActivity", "Comparing: " + activityName + " with " + name);
+                            if (name != null && activityName.equalsIgnoreCase(name.trim())) {
+                                isAssigned = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (isAssigned) break;
+                }
+
+                LinearLayout layout = findViewById(layoutId);
+                View lockOverlay = findViewById(lockOverlayId);
+
+                if (layout == null || lockOverlay == null) {
+                    Log.e("AcademicActivity", "Missing view for: " + activityName);
+                    return;
+                }
+
+                if (isAssigned) {
+                    lockOverlay.setVisibility(View.GONE);
+                    layout.setEnabled(true);
+                    layout.setAlpha(1.0f);
+                    layout.setOnClickListener(v -> openWebLink(url));
+                } else {
+                    lockOverlay.setVisibility(View.VISIBLE);
+                    layout.setEnabled(false);
+                    layout.setAlpha(0.5f);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("AcademicActivity", "Error checking activity: " + error.getMessage());
+            }
+        });
+    }
+
+    private void openWebLink(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
     }
 }
-/*
-E: Counting_Game: https://cognoappproject.github.io/Counting_Game/
-E: LearnColors: https://cognoappproject.github.io/LearnColors/
-M: ShapeSorter: https://cognoappproject.github.io/ShapeSorter/
-H: Sequencing-Tasks-Game: https://cognoappproject.github.io/Sequencing-Tasks-Game/
-E: Color-Sorting-Game: https://cognoappproject.github.io/Color-Sorting-Game/
-M: Number-Sequence-Game: https://cognoappproject.github.io/Number-Sequence-Game/
-H: WordBuilder: https://cognoappproject.github.io/WordBuilder/
-E: Reaction-Time-Tap-Game: https://cognoappproject.github.io/Reaction-Time-Tap-Game/
-M: Bubble-Pop-Game: https://cognoappproject.github.io/Bubble-Pop-Game/
-H: Memory-Card-Match: https://cognoappproject.github.io/Memory-Card-Match/
-
-
- */
-
-
-// connections
-        /*LinearLayout numbers=findViewById(R.id.numbers);
-        LinearLayout words=findViewById(R.id.words);
-        LinearLayout colours=findViewById(R.id.colours);
-        LinearLayout shapes=findViewById(R.id.shapes);
-        LinearLayout sequence=findViewById(R.id.sequence);
-
-        numbers.setOnClickListener(v -> {
-            String meetUrl = "https://cognoappproject.github.io/Counting_Game/";
-
-            // Create an Intent to open the link in a browser
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(meetUrl));
-
-            // Start the activity with the intent
-            startActivity(intent);
-        });
-
-        words.setOnClickListener(v -> {
-            String meetUrl = "https://cognoappproject.github.io/WordBuilder/";
-
-            // Create an Intent to open the link in a browser
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(meetUrl));
-
-            // Start the activity with the intent
-            startActivity(intent);
-        });
-
-        colours.setOnClickListener(v -> {
-            String meetUrl = "https://cognoappproject.github.io/LearnColors/";
-
-            // Create an Intent to open the link in a browser
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(meetUrl));
-
-            // Start the activity with the intent
-            startActivity(intent);
-        });
-
-        shapes.setOnClickListener(v -> {
-            String meetUrl = "https://cognoappproject.github.io/ShapeSorter/";
-
-            // Create an Intent to open the link in a browser
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(meetUrl));
-
-            // Start the activity with the intent
-            startActivity(intent);
-        });
-
-        sequence.setOnClickListener(v -> {
-            String meetUrl = "https://cognoappproject.github.io/Sequencing-Tasks-Game/";
-
-            // Create an Intent to open the link in a browser
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(meetUrl));
-
-            // Start the activity with the intent
-            startActivity(intent);
-        });
-        }}
-        */
