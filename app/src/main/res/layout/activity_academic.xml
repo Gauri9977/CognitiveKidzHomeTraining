@@ -118,14 +118,44 @@
                                 android:textColor="@color/textcolour"
                                 android:paddingTop="8dp" />
 
-                            <ImageView
-                                android:id="@+id/LearnColors_image"
-                                android:layout_width="177sp"
-                                android:layout_height="159sp"
+                            <LinearLayout
+                                android:id="@+id/ShapeSorter"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:contentDescription="LearnColors"
-                                android:paddingTop="12sp"
-                                android:src="@drawable/words" />
+                                android:background="@color/skin"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="Task 3 :"
+                                    android:textColor="@color/textcolour"
+                                    android:textSize="20sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/ShapeSorter_game"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:paddingTop="8dp"
+                                    android:text="Shape Sorter"
+                                    android:textColor="@color/textcolour"
+                                    android:textSize="18sp" />
+
+                                <ImageView
+                                    android:id="@+id/ShapeSorter_image"
+                                    android:layout_width="177sp"
+                                    android:layout_height="159sp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="ShapeSorter"
+                                    android:paddingTop="12sp"
+                                    android:src="@drawable/colors" />
+                            </LinearLayout>
+
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -138,43 +168,6 @@
                         app:cardElevation="4dp"
                         >
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_gravity="center"
-                            android:background="@color/skin"
-                            android:padding="16dp"
-                            android:id="@+id/ShapeSorter">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Task 3 :"
-                                android:textColor="@color/textcolour"
-                                android:textSize="20sp"
-                                android:layout_gravity="center"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Shape Sorter"
-                                android:id="@+id/ShapeSorter_game"
-                                android:layout_gravity="center"
-                                android:textSize="18sp"
-                                android:textColor="@color/textcolour"
-                                android:paddingTop="8dp" />
-
-                            <ImageView
-                                android:id="@+id/ShapeSorter_image"
-                                android:layout_width="177sp"
-                                android:layout_height="159sp"
-                                android:layout_gravity="center"
-                                android:contentDescription="ShapeSorter"
-                                android:paddingTop="12sp"
-                                android:src="@drawable/colors" />
-                        </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
                     <!-- Task 4 Sequencing_Tasks_Game-->
@@ -514,6 +507,15 @@
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/LearnColors_image"
+            android:layout_width="177sp"
+            android:layout_height="159sp"
+            android:layout_gravity="center"
+            android:contentDescription="LearnColors"
+            android:paddingTop="12sp"
+            android:src="@drawable/words" />
     </LinearLayout>
     <include layout="@layout/fragment_drawer"/>
 

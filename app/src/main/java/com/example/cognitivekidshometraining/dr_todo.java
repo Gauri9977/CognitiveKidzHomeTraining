@@ -1,24 +1,18 @@
 package com.example.cognitivekidshometraining;
 
-import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -27,36 +21,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class dr_todo extends AppCompatActivity {
 
-    Toolbar toolbar;
-    TextView toolbar_title, disorder_tv;
-    ImageView toolbar_left_image;
-    ActionBarDrawerToggle toggle;
+    private Spinner spinnerChildName;
+    private TextView disorder_tv, selectedActivities_tv;
+    private LinearLayout onlineActivitiesLayout;
+    private LinearLayout offlineActivitiesLayout;
+    private Button saveActivitiesBtn;
 
-    Spinner spinnerDisorder, spinnerChildName, spinnerTherapist;
-
-    Spinner spinnerTask1, spinnerTask2, spinnerTask3;
-    EditText editTime1, editTime2, editTime3;
-    Button btnAssignTodo;
-
-    Map<String, List<String>> childNameMap = new HashMap<>();
-
-    // Updated task categories
-    String[] therapySessions = {"Therapy Session 1", "Therapy Session 2"};
-    String[] activities = {"Learn Numbers", "Learn Words", "Learn Colours", "Learn Shapes", "Learn Sequence"};
-    String[] otherActivities = {"Outdoor Games", "Mind Games", "Puzzles", "Meditation", "Mind Exercises"};
-
-    String[] childNames = {"ABC", "PQR", "XYZ"};
-    String[] disorders = {"Autism", "ADHD", "IQ/DQ", "Learning Disorder"};
-    String[] therapists = {"Doctor A", "Doctor B", "Doctor C", "Doctor D"};
-
-    CheckBox checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, checkbox6, checkbox7, checkbox8, checkbox9;
+    private final List<String> childNames = new ArrayList<>();
+    private final HashMap<String, String> childDisorderMap = new HashMap<>();
+    private final HashMap<String, String> selectedActivities = new HashMap<>();
+    private final HashMap<String, String> offlineActivityCategoryMap = new HashMap<>();
 
     private DatabaseReference usersRef;
-    private Map<String, String> childUidMap = new HashMap<>();
+    private DatabaseReference onlineActivitiesRef;
+    private DatabaseReference offlineActivitiesRef;
+    private DatabaseReference assignedActivitiesRef;
+
+    private String currentDisorderText = "";
+    private String selectedChildName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,161 +49,194 @@ public class dr_todo extends AppCompatActivity {
         setContentView(R.layout.activity_dr_todo);
 
         spinnerChildName = findViewById(R.id.spinnerChildName);
-        spinnerDisorder = findViewById(R.id.spinnerDisorder);
         disorder_tv = findViewById(R.id.disorder_tv);
+        selectedActivities_tv = findViewById(R.id.selectedActivities_tv);
+        onlineActivitiesLayout = findViewById(R.id.onlineActivitiesLayout);
+        offlineActivitiesLayout = findViewById(R.id.offlineActivitiesLayout);
+        saveActivitiesBtn = findViewById(R.id.saveActivitiesBtn);
 
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
+        onlineActivitiesRef = FirebaseDatabase.getInstance().getReference("OnlineActivities");
+        offlineActivitiesRef = FirebaseDatabase.getInstance().getReference("OfflineActivities");
+        assignedActivitiesRef = FirebaseDatabase.getInstance().getReference("AssignedActivities");
 
-        fetchChildren();
+        loadChildrenFromFirebase();
+        loadOnlineActivities();
+        loadOfflineActivities();
 
-        // Child Name Spinner data
-
-        // Disorder Spinner data
-        String[] disorders = {"Autism", "ADHD", "IQ/DQ", "Learning disability"};
-
-        toolbar = findViewById(R.id.toolbar);
-        toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
-        toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
-        toolbar_title.setText("Assign Activities");
-        toolbar_left_image.setVisibility(View.GONE);
-
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.drawer_frag1, new DrawerFragment1()).commit();
-
-        DrawerLayout drawer = findViewById(R.id.dr_todo_drawer_layout);
-        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-
-//        ArrayAdapter<String> childAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, childNames);
-//        childAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinnerChildName.setAdapter(childAdapter);
-
-        // Set adapter for Disorder Spinner
-        ArrayAdapter<String> disorderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, disorders);
-        disorderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerDisorder.setAdapter(disorderAdapter);
-
-        // Optional: Add listeners
-        spinnerChildName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedChild = parent.getItemAtPosition(position).toString();
-                Toast.makeText(dr_todo.this, "Selected Child: " + selectedChild, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-//        spinnerDisorder.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String selectedDisorder = parent.getItemAtPosition(position).toString();
-//                Toast.makeText(dr_todo.this, "Selected Disorder: " + selectedDisorder, Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//            }
-//        });
-
-
-        checkbox1 = findViewById(R.id.checkbox1);
-        checkbox2 = findViewById(R.id.checkbox2);
-        checkbox3 = findViewById(R.id.checkbox3);
-        checkbox4 = findViewById(R.id.checkbox4);
-        checkbox5 = findViewById(R.id.checkbox5);
-        checkbox6 = findViewById(R.id.checkbox6);
-        checkbox8 = findViewById(R.id.checkbox8);
-        checkbox9 = findViewById(R.id.checkbox9);
-        checkbox7 = findViewById(R.id.checkbox7);
-        btnAssignTodo = findViewById(R.id.btnAssignTodo);
-
-
-        btnAssignTodo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                StringBuilder schedule = new StringBuilder();
-
-                if (checkbox1.isChecked()) schedule.append("- Activity 1: Learn Numbers\n");
-                if (checkbox2.isChecked()) schedule.append("- Activity 2: Learn Words\n");
-                if (checkbox3.isChecked()) schedule.append("- Activity 3: Learn Colours\n");
-                if (checkbox4.isChecked()) schedule.append("- Activity 4: Learn Shapes\n");
-                if (checkbox5.isChecked()) schedule.append("- Activity 5: Learn Sequence\n");
-                if (checkbox9.isChecked()) schedule.append("- Mind Exercises\n");
-                if (checkbox6.isChecked()) schedule.append("- Mind Games\n");
-                if (checkbox7.isChecked()) schedule.append("- OutDoor Games\n");
-                if (checkbox8.isChecked()) schedule.append("- Puzzles\n");
-
-                if (schedule.length() == 0) {
-                    Toast.makeText(dr_todo.this, "Please select at least one task", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Save schedule using SharedPreferences
-                SharedPreferences prefs = getSharedPreferences("ChildTodo", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("todoData", schedule.toString());
-                editor.apply();
-
-                Toast.makeText(dr_todo.this, "Schedule Assigned Successfully", Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
+        saveActivitiesBtn.setOnClickListener(view -> saveSelectedActivities());
     }
 
-    private void fetchChildren() {
+    private void loadChildrenFromFirebase() {
         usersRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
-                List<String> childNames = new ArrayList<>();
+                DataSnapshot snapshot = task.getResult();
 
-                for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
-                    String uid = userSnapshot.getKey();
-                    String name = userSnapshot.child("ChildData/child_name").getValue(String.class);
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    DataSnapshot childDataSnapshot = userSnapshot.child("ChildData");
+                    if (childDataSnapshot.exists()) {
+                        String name = childDataSnapshot.child("child_name").getValue(String.class);
+                        String disorder = childDataSnapshot.child("disability_type").getValue(String.class);
 
-                    if (name != null) {
-                        childNames.add(name);
-                        childUidMap.put(name, uid); // Store mapping
+                        if (name != null && !name.trim().isEmpty()) {
+                            childNames.add(name);
+                            childDisorderMap.put(name, disorder != null ? disorder : "Not specified");
+                        }
                     }
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, childNames);
+                if (childNames.isEmpty()) {
+                    Toast.makeText(dr_todo.this, "No children found in Users table", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(dr_todo.this, android.R.layout.simple_spinner_dropdown_item, childNames);
                 spinnerChildName.setAdapter(adapter);
 
                 spinnerChildName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String selectedName = parent.getItemAtPosition(position).toString();
-                        String uid = childUidMap.get(selectedName);
-                        fetchDisorderForChild(uid);
+                        selectedChildName = parent.getItemAtPosition(position).toString();
+                        String disorder = childDisorderMap.get(selectedChildName);
+                        currentDisorderText = "Disorder: " + (disorder != null ? disorder : "Not specified");
+                        updateDisorderAndSelectionText();
                     }
 
                     @Override
-                    public void onNothingSelected(AdapterView<?> parent) {}
+                    public void onNothingSelected(AdapterView<?> parent) {
+                        currentDisorderText = "Disorder:";
+                        updateDisorderAndSelectionText();
+                    }
                 });
 
             } else {
-                Toast.makeText(this, "Failed to load children", Toast.LENGTH_SHORT).show();
+                Toast.makeText(dr_todo.this, "Failed to load child data from Users", Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    private void fetchDisorderForChild(String uid) {
-        usersRef.child(uid).child("ChildData").child("disability_type")
-                .get().addOnSuccessListener(snapshot -> {
-                    String disorder = snapshot.getValue(String.class);
-                    if (disorder != null) {
-                        disorder_tv.setText("Disorder: " + disorder);
-                    } else {
-                        disorder_tv.setText("Disorder: Not specified");
+    private void loadOnlineActivities() {
+        onlineActivitiesRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                DataSnapshot snapshot = task.getResult();
+                for (DataSnapshot activitySnapshot : snapshot.getChildren()) {
+                    String activityName = activitySnapshot.child("activity_name").getValue(String.class);
+                    if (activityName != null && !activityName.trim().isEmpty()) {
+                        addCheckboxToLayout(onlineActivitiesLayout, activityName);
                     }
-                }).addOnFailureListener(e -> {
-                    disorder_tv.setText("Error fetching disorder");
-                });
+                }
+            } else {
+                Toast.makeText(dr_todo.this, "Failed to load online activities", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void loadOfflineActivities() {
+        offlineActivitiesRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                DataSnapshot snapshot = task.getResult();
+
+                for (DataSnapshot categorySnapshot : snapshot.getChildren()) {
+                    String category = categorySnapshot.getKey();
+                    TextView categoryLabel = new TextView(this);
+                    categoryLabel.setText(category);
+                    categoryLabel.setTextSize(17);
+                    categoryLabel.setTextColor(getResources().getColor(android.R.color.holo_blue_dark));
+                    categoryLabel.setPadding(0, 12, 0, 6);
+                    offlineActivitiesLayout.addView(categoryLabel);
+
+                    for (DataSnapshot activitySnapshot : categorySnapshot.getChildren()) {
+                        String activityName = activitySnapshot.child("activity_name").getValue(String.class);
+                        if (activityName != null && !activityName.trim().isEmpty()) {
+                            offlineActivityCategoryMap.put(activityName, category);
+                            addCheckboxToLayout(offlineActivitiesLayout, activityName);
+                        }
+                    }
+                }
+            } else {
+                Toast.makeText(dr_todo.this, "Failed to load offline activities", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void addCheckboxToLayout(LinearLayout layout, String activityName) {
+        CheckBox checkBox = new CheckBox(this);
+        checkBox.setText(activityName);
+        checkBox.setTextSize(16);
+        checkBox.setTextColor(getResources().getColor(android.R.color.black));
+
+        checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                selectedActivities.put(activityName, "selected");
+            } else {
+                selectedActivities.remove(activityName);
+            }
+            updateDisorderAndSelectionText();
+        });
+
+        layout.addView(checkBox);
+    }
+
+    private void updateDisorderAndSelectionText() {
+        disorder_tv.setText(currentDisorderText);
+        StringBuilder selectedText = new StringBuilder("Selected Activities:\n");
+        if (selectedActivities.isEmpty()) {
+            selectedText.append("- None");
+        } else {
+            for (String activity : selectedActivities.keySet()) {
+                selectedText.append("- ").append(activity).append("\n");
+            }
+        }
+        selectedActivities_tv.setText(selectedText.toString());
+    }
+
+    private boolean isActivityInLayout(LinearLayout layout, String activityName) {
+        for (int i = 0; i < layout.getChildCount(); i++) {
+            View view = layout.getChildAt(i);
+            if (view instanceof CheckBox) {
+                CheckBox cb = (CheckBox) view;
+                if (cb.getText().toString().equals(activityName)) return true;
+            }
+        }
+        return false;
+    }
+
+    private void saveSelectedActivities() {
+        if (selectedChildName.isEmpty()) {
+            Toast.makeText(this, "Please select a child first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String assignedTime = java.text.DateFormat.getDateTimeInstance().format(new java.util.Date());
+
+        List<HashMap<String, String>> onlineActivities = new ArrayList<>();
+        HashMap<String, List<HashMap<String, String>>> offlineByCategory = new HashMap<>();
+
+        for (String activityName : selectedActivities.keySet()) {
+            HashMap<String, String> activityEntry = new HashMap<>();
+            activityEntry.put("activity_name", activityName);
+
+            if (isActivityInLayout(onlineActivitiesLayout, activityName)) {
+                onlineActivities.add(activityEntry);
+            } else {
+                String category = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    category = offlineActivityCategoryMap.getOrDefault(activityName, "Uncategorized");
+                }
+
+                if (!offlineByCategory.containsKey(category)) {
+                    offlineByCategory.put(category, new ArrayList<>());
+                }
+                offlineByCategory.get(category).add(activityEntry);
+            }
+        }
+
+        HashMap<String, Object> childData = new HashMap<>();
+        if (!onlineActivities.isEmpty()) childData.put("online", onlineActivities);
+        if (!offlineByCategory.isEmpty()) childData.put("offline", offlineByCategory);
+
+        assignedActivitiesRef.child(selectedChildName).child(assignedTime).setValue(childData)
+                .addOnSuccessListener(aVoid -> Toast.makeText(this, "Activities saved!", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(this, "Failed to save activities", Toast.LENGTH_SHORT).show());
     }
 }

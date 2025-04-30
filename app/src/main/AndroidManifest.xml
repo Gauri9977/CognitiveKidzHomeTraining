@@ -186,7 +186,11 @@
 
         <activity android:name=".ReportDoctorReportActivity" android:exported="true" />
 
-        <!-- Report related activities start here -->
+        <!-- Report related activities end here -->
+
+        <!-- Chatbot -->
+        <activity android:name=".ChatbotActivity" />
+
 
     </application>
 
