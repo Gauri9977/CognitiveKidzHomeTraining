@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -52,6 +53,7 @@ public class consultation extends AppCompatActivity {
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
         // Fragment drawer
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
@@ -96,11 +98,18 @@ public class consultation extends AppCompatActivity {
                 return;
             }
 
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
+
             if (selectedId == R.id.rb_accept) {
-                // Save to SharedPreferences
-                SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
-                editor.putString(STATUS_KEY, "Confirmed");
-                editor.apply();
+                editor.putString("appointment_response", "accepted");
+                editor.putString("reschedule_reason", "");
+
+                // Save to additional SharedPreferences
+                SharedPreferences.Editor confirmEditor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+                confirmEditor.putString(STATUS_KEY, "Confirmed");
+                confirmEditor.apply();
+
                 Toast.makeText(this, "Appointment Confirmed", Toast.LENGTH_SHORT).show();
             } else if (selectedId == R.id.rb_reschedule) {
                 if (!cbDay.isChecked() && !cbWeek.isChecked()) {
@@ -114,8 +123,12 @@ public class consultation extends AppCompatActivity {
                     return;
                 }
 
+                editor.putString("appointment_response", "rescheduled");
+                editor.putString("reschedule_reason", reason);
                 Toast.makeText(this, "Rescheduling with reason: " + reason, Toast.LENGTH_LONG).show();
             }
+
+            editor.apply();
         });
     }
 }

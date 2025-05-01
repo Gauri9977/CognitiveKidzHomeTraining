@@ -32,8 +32,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textSize="18sp"
             android:layout_marginBottom="16dp"
-            android:textColor="@android:color/black"/>
+            android:textColor="@color/textcolour"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -141,7 +145,7 @@
             android:layout_marginTop="16dp"
             android:text="Assigned Therapies:"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textColor="@color/textcolour"
             tools:ignore="HardcodedText" />
 
@@ -150,6 +154,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textSize="18sp"
             android:textColor="@android:color/black"/>
 
     </LinearLayout>

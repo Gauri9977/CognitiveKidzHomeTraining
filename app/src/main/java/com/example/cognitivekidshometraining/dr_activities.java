@@ -47,7 +47,7 @@ public class dr_activities extends AppCompatActivity {
     HashMap<String, String[]> subActivityMap;
     String[] activityTypes = {"Speech Therapy", "Occupational Therapy", "Physical Therapy", "Behavioral Therapy"};
     String[] therapistsList = {"Dr. Nitin Chavan", "Therapist A", "Therapist B", "Therapist C", "Therapist D"};
-    String[] childNamesList = {"Sanchi Kasbe", "Shourya Avate", "Vihan Jagtap"};
+    String[] childNamesList = {"Sanchi Kasbe", "Shourya Avate", "Vihan Jagtap", "janvi Satpute"};
     Toolbar toolbar;
     TextView toolbar_title;
     ImageView toolbar_left_image;

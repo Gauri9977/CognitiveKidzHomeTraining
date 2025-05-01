@@ -23,8 +23,8 @@
             android:paddingTop="50sp"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
-            android:layout_marginTop="40sp"
-            android:paddingBottom="50sp"
+            android:layout_marginTop="20sp"
+            android:paddingBottom="10sp"
             android:gravity="center"
             android:layout_gravity="center"
             android:orientation="vertical">
@@ -35,21 +35,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="8dp">
+
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center"
                     android:text="Child's Name: "
                     android:textSize="18sp"
                     android:textColor="@color/textcolour"/>
 
-                <EditText
-                    android:id="@+id/et_child_name"
+                <Spinner
+                    android:id="@+id/spinner_child_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="Enter child's name"
+                    android:hint="Enter disorder details"
                     android:textColorHint="@color/textcolour"
                     android:textSize="18sp"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    android:textColor="@color/textcolour"
+                    tools:ignore="TouchTargetSizeCheck"
+                    android:spinnerMode="dropdown"
+                    android:enabled="false" />
+
             </LinearLayout>
 
             <!-- Child's Disorder -->
@@ -58,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="8dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,17 +72,19 @@
                     android:textSize="18sp"
                     android:textColor="@color/textcolour"/>
 
-                <EditText
-                    android:id="@+id/et_child_disorder"
+                <Spinner
+                    android:id="@+id/spinner_child_disorder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Enter disorder details"
                     android:textColorHint="@color/textcolour"
                     android:textSize="18sp"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    android:textColor="@color/textcolour"
+                    tools:ignore="TouchTargetSizeCheck"
+                    android:spinnerMode="dropdown"
+                    android:enabled="false" />
+
             </LinearLayout>
-
-
 
 
             <!-- Consultation Appointment Date & Time -->
@@ -159,6 +168,30 @@
                 android:layout_gravity="center"/>
 
         </LinearLayout>
+
+        <!-- Response Status -->
+        <TextView
+            android:id="@+id/tv_response_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Appointment response not received yet."
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:padding="8dp" />
+
+        <Button
+            android:id="@+id/btn_action_response"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Take Action"
+            android:backgroundTint="@color/textcolour"
+            android:textColor="@color/skin"
+            android:visibility="gone"
+            android:layout_marginTop="10dp" />
+
     </LinearLayout>
     <include layout="@layout/fragment_drawer1"/>
 </androidx.drawerlayout.widget.DrawerLayout>
