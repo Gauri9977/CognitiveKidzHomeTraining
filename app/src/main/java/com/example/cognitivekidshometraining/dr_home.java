@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -30,13 +31,12 @@ public class dr_home extends AppCompatActivity {
         setContentView(R.layout.activity_dr_home);
 
         LinearLayout todolayout= findViewById(R.id.todo_linear_layout1);
+        LinearLayout academic_linear_layout=findViewById(R.id.academic_linear_layout1);
         LinearLayout activity_linear_layout=findViewById(R.id.activity_linear_layout1);
         LinearLayout consultation=findViewById(R.id.consultation_linear_layout1);
         LinearLayout child_details=findViewById(R.id.reward_linear_layout1);
         LinearLayout report=findViewById(R.id.weeklyreport_linear_layout1);
         LinearLayout dr_profile= findViewById(R.id.myactivity_home);
-        LinearLayout chatbot=findViewById(R.id.chatbot_linear_layout);
-
 
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
@@ -83,10 +83,8 @@ public class dr_home extends AppCompatActivity {
             startActivity(intent);
         });
 
-        //chatbot
-        chatbot.setOnClickListener(v -> {
-            Intent intent = new Intent(dr_home.this, ChatbotActivity.class);
-            startActivity(intent);
+        academic_linear_layout.setOnClickListener(v -> {
+            Toast.makeText(dr_home.this, "Academic Activities will be available soon. Stay tuned!", Toast.LENGTH_SHORT).show();
         });
 
         //Doctorside report

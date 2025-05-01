@@ -1,15 +1,16 @@
 package com.example.cognitivekidshometraining;
 
-import android.app.TimePickerDialog;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,38 +21,23 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class dr_activities extends AppCompatActivity {
 
-    //Spinner spinner1, spinner2;
-    Button assignButton;
-    EditText etAppointmentTime;
-    Spinner childNameSpinner;
-    Spinner therapistSpinner;
-    Spinner activityTypeSpinner;
-    EditText notesEditText;
-    TextView assignedTherapiesTextView;
-    TextView assignedListTextView;
-    TextView appointmentDetailsTextView; // To display appointment info
-    String selectedTime;
-    String selectedChild;
-    String selectedTherapist;
-    String selectedActivityType;
-    String notes;
-    List<String> assignedTherapiesList = new ArrayList<>();
-    //String[] mainActivities = {"Numbers", "Words", "Colours", "Shapes", "Sequence"};
-    HashMap<String, String[]> subActivityMap;
-    String[] activityTypes = {"Speech Therapy", "Occupational Therapy", "Physical Therapy", "Behavioral Therapy"};
-    String[] therapistsList = {"Dr. Nitin Chavan", "Therapist A", "Therapist B", "Therapist C", "Therapist D"};
-    String[] childNamesList = {"Sanchi Kasbe", "Shourya Avate", "Vihan Jagtap", "janvi Satpute"};
-    Toolbar toolbar;
-    TextView toolbar_title;
-    ImageView toolbar_left_image;
-    ActionBarDrawerToggle toggle;
+    private LinearLayout tableContainer;
+    private DatabaseReference dbRef;
+    private Toolbar toolbar;
+    private TextView toolbar_title;
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,145 +46,164 @@ public class dr_activities extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
-        toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
-        toolbar_title.setText("Assign Activities");
-        toolbar_left_image.setVisibility(View.GONE);
+        toolbar_title.setText("Consultation Schedule");
+
+        DrawerLayout drawer = findViewById(R.id.dr_activity_page);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.drawer_frag1, new DrawerFragment1()).commit();
-        DrawerLayout drawer = findViewById(R.id.dr_activity_page);
-        toggle = new ActionBarDrawerToggle(dr_activities.this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
-        drawer.addDrawerListener(toggle);
-        toggle.setToolbarNavigationClickListener(v -> {});
-        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
-        toggle.syncState();
 
+        tableContainer = findViewById(R.id.table_container);
+        dbRef = FirebaseDatabase.getInstance().getReference("therapy_and_consultation");
 
-        etAppointmentTime = findViewById(R.id.etAppointmentTime);
-        childNameSpinner = findViewById(R.id.childNameSpinner1);
-        therapistSpinner = findViewById(R.id.therapistSpinner1);
-        activityTypeSpinner = findViewById(R.id.activityTypeSpinner1);
-        notesEditText = findViewById(R.id.notesEditText1);
-        assignButton = findViewById(R.id.assignButton);
-        assignedTherapiesTextView = findViewById(R.id.assignedTherapiesTextView);
-        assignedListTextView = findViewById(R.id.assignedListTextView);
-        appointmentDetailsTextView = findViewById(R.id.appointmentDetailsTextView); // Initialize
+        loadConsultationSchedule();
+    }
 
-        // Retrieve appointment details from SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("AppointmentDetails", MODE_PRIVATE);
-        String appointmentChildName = sharedPreferences.getString("appointment_child_name", "");
-        String appointmentTime = sharedPreferences.getString("appointment_time", "");
-        String appointmentDoctorName = sharedPreferences.getString("appointment_doctor_name", "");
-
-        if (!appointmentChildName.isEmpty() && !appointmentTime.isEmpty() && !appointmentDoctorName.isEmpty()) {
-            String appointmentInfo = String.format("Appointment Details:\nTime: %s\nChild: %s\nDoctor: %s",
-                    appointmentTime, appointmentChildName, appointmentDoctorName);
-            appointmentDetailsTextView.setText(appointmentInfo);
-        } else {
-            appointmentDetailsTextView.setText("No appointment scheduled.");
-        }
-
-        // Initialize with default values
-        selectedTime = "Select Time";
-        selectedChild = "";
-        selectedTherapist = "";
-        selectedActivityType = "";
-        notes = "";
-        etAppointmentTime.setText(selectedTime);
-
-        // Time picker
-        etAppointmentTime.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            new TimePickerDialog(
-                    this,
-                    (view, hourOfDay, minute) -> {
-                        selectedTime = String.format("%02d:%02d", hourOfDay, minute);
-                        etAppointmentTime.setText(selectedTime);
-                    },
-                    calendar.get(Calendar.HOUR_OF_DAY),
-                    calendar.get(Calendar.MINUTE),
-                    true
-            ).show();
-        });
-
-        // Child Name Dropdown
-        ArrayAdapter<String> childAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, childNamesList);
-        childNameSpinner.setAdapter(childAdapter);
-
-        childNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    private void loadConsultationSchedule() {
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedChild = (String) parent.getItemAtPosition(position);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                selectedChild = "";
-            }
-        });
-
-        // Therapist Dropdown
-        ArrayAdapter<String> therapistAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, therapistsList);
-        therapistSpinner.setAdapter(therapistAdapter);
-
-        therapistSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedTherapist = (String) parent.getItemAtPosition(position);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                selectedTherapist = "";
-            }
-        });
-
-        // Activity Type Dropdown
-        ArrayAdapter<String> activityTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, activityTypes);
-        activityTypeSpinner.setAdapter(activityTypeAdapter);
-
-        activityTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedActivityType = (String) parent.getItemAtPosition(position);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                selectedActivityType = "";
-            }
-        });
-
-        // Assign Button Click Listener
-        assignButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                notes = notesEditText.getText().toString().trim();
-                if (!selectedTime.equals("Select Time") && !selectedChild.isEmpty() && !selectedTherapist.isEmpty() && !selectedActivityType.isEmpty()) {
-                    String assignment = String.format("%-10s   %-15s   %-20s",
-                            selectedTime, selectedChild, selectedTherapist);
-                    assignedTherapiesList.add(assignment);
-                    displayAssignedTherapies();
-                    // Optionally clear fields after assignment
-                    etAppointmentTime.setText("Select Time");
-                    childNameSpinner.setSelection(0);
-                    therapistSpinner.setSelection(0);
-                    activityTypeSpinner.setSelection(0);
-                    notesEditText.setText("");
-                } else {
-                    Toast.makeText(dr_activities.this, "Please select Time, Child, Therapist, and Activity Type", Toast.LENGTH_SHORT).show();
+            public void onDataChange(DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    Toast.makeText(dr_activities.this, "No consultation data found.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+
+                Map<String, Map<String, Map<String, String>>> dateWiseMap = new TreeMap<>();
+
+                for (DataSnapshot childSnapshot : snapshot.getChildren()) {
+                    String childName = childSnapshot.getKey();
+                    for (DataSnapshot entry : childSnapshot.getChildren()) {
+                        String dateTimeKey = entry.getKey();
+                        Map<String, String> entryData = (Map<String, String>) entry.getValue();
+
+                        String date = entryData.get("assignedDate");
+                        if (!dateWiseMap.containsKey(date)) {
+                            dateWiseMap.put(date, new HashMap<>());
+                        }
+                        dateWiseMap.get(date).put(childName + "/" + dateTimeKey, entryData);
+                    }
+                }
+
+                renderTables(dateWiseMap);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Toast.makeText(dr_activities.this, "Failed to load data.", Toast.LENGTH_SHORT).show();
             }
         });
     }
-    private void displayAssignedTherapies() {
-        StringBuilder sb = new StringBuilder();
-        if (assignedTherapiesList.isEmpty()) {
-            assignedListTextView.setText("No therapies assigned yet.");
-        } else {
-            sb.append(String.format("%-10s %-15s %-20s\n", "Time", "Child Name", "Therapist"));
-            sb.append("---------------------------------------------\n");
-            for (String assignment : assignedTherapiesList) {
-                sb.append(assignment).append("\n");
+
+    private void renderTables(Map<String, Map<String, Map<String, String>>> dateWiseMap) {
+        tableContainer.removeAllViews();
+
+        for (String date : dateWiseMap.keySet()) {
+            TextView dateHeader = new TextView(this);
+            dateHeader.setText("📅 " + date);
+            dateHeader.setTextSize(20);
+            dateHeader.setTypeface(null, Typeface.BOLD);
+            dateHeader.setTextColor(getResources().getColor(R.color.textcolour));
+            dateHeader.setPadding(0, 24, 0, 16);
+            tableContainer.addView(dateHeader);
+
+            TableLayout table = new TableLayout(this);
+            table.setLayoutParams(new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.WRAP_CONTENT,
+                    TableLayout.LayoutParams.WRAP_CONTENT
+            ));
+            table.setStretchAllColumns(true);
+            table.setBackgroundResource(R.drawable.table_border);
+
+            // Header row
+            TableRow header = new TableRow(this);
+            header.setBackgroundColor(Color.parseColor("#003366")); // dark blue
+
+            String[] headers = {"Time", "Child", "Therapist", "Status", "Reason", "Meeting Link"};
+            for (String h : headers) {
+                TextView tv = new TextView(this);
+                tv.setText(h);
+                tv.setTextSize(16);
+                tv.setTypeface(null, Typeface.BOLD);
+                tv.setPadding(16, 12, 16, 12);
+                tv.setTextColor(Color.BLUE);
+                tv.setBackgroundResource(R.drawable.table_cell_border);
+                header.addView(tv);
             }
-            assignedListTextView.setText(sb.toString());
+            table.addView(header);
+
+            // Data rows
+            int rowIndex = 0;
+            for (String key : dateWiseMap.get(date).keySet()) {
+                Map<String, String> entry = dateWiseMap.get(date).get(key);
+
+                TableRow row = new TableRow(this);
+                int rowColor = (rowIndex++ % 2 == 0)
+                        ? getResources().getColor(R.color.row_even)
+                        : getResources().getColor(R.color.row_odd);
+                row.setBackgroundColor(rowColor);
+
+                String[] fields = null;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    fields = new String[]{
+                            entry.get("assignedtime"),
+                            key.split("/")[0],
+                            entry.get("therapist_name"),
+                            entry.getOrDefault("status", "-"),
+                            entry.getOrDefault("reschedule_reason", "-"),
+                            "Open"
+                    };
+                }
+
+                for (int i = 0; i < fields.length; i++) {
+                    TextView tv = new TextView(this);
+                    tv.setText(fields[i]);
+                    tv.setTextSize(14);
+                    tv.setTextColor(Color.BLACK); // black for values
+                    tv.setPadding(16, 12, 16, 12);
+                    tv.setBackgroundResource(R.drawable.table_cell_border);
+
+                    if (i == 5) {
+                        // Get the meeting link from entry (make sure it's valid)
+                        final String originalMeetingLink = entry.get("meetingLink");
+
+                        // Ensure the meeting link is not null and not empty
+                        if (originalMeetingLink != null && !originalMeetingLink.isEmpty()) {
+                            // Prepare the link to open by adding "https://" if not already present
+                            final String meetingLink;
+                            if (!originalMeetingLink.startsWith("http://") && !originalMeetingLink.startsWith("https://")) {
+                                meetingLink = "https://" + originalMeetingLink; // Modify the link
+                            } else {
+                                meetingLink = originalMeetingLink; // Keep the link as it is
+                            }
+
+                            tv.setTextColor(Color.BLUE);  // Set text color for meeting link
+                            tv.setTypeface(null, Typeface.BOLD);  // Make the text bold
+
+                            // Set the click listener for the meeting link
+                            tv.setOnClickListener(view -> {
+                                // Create an Intent to open the URL in a browser
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(meetingLink));
+                                startActivity(intent);
+                            });
+                        } else {
+                            // If no meeting link is available, display a message
+                            tv.setTextColor(Color.GRAY);
+                            tv.setText("No meeting link available");
+                        }
+                    }
+
+
+                    row.addView(tv);
+                }
+
+                table.addView(row);
+            }
+
+            tableContainer.addView(table);
         }
     }
 }

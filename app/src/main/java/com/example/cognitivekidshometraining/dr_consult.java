@@ -2,57 +2,47 @@ package com.example.cognitivekidshometraining;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import java.util.Calendar;
-import java.util.HashMap;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.widget.TextView;
-import android.widget.Button;
-
+import com.google.firebase.database.*;
+import java.util.*;
 
 public class dr_consult extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TextView toolbarTitle;
     private ImageView toolbarLeftImage;
-    private ActionBarDrawerToggle toggle;
+    private EditText etAppointmentDate, etAppointmentTime, etDoctorNote;
+    private Spinner spinnerChildName, spinnerChildDisorder, spinnerTherapist;
+    private Button btnSendRequest;
 
-    private EditText etAppointmentDate, etAppointmentTime;
-    private Spinner spinnerChildName, spinnerChildDisorder;
+    private DatabaseReference usersRef, consultationRef;
 
-    // Map for storing child name and disorder mapping
-    private final HashMap<String, String> childDisorderMap = new HashMap<String, String>() {{
-        put("Vihan Jagtap", "Autism Spectrum Disorder");
-        put("Shourya Avate", "IQ/DQ");
-        put("Sanchi Kasbe", "ASD");
-        put("Janvi Satpute", "ADHD");
-    }};
+    private final List<String> childList = new ArrayList<>();
+    private final HashMap<String, String> disorderMap = new HashMap<>();
+
+    private final String[] therapists = {"Nitin Chavan", "Therapist 1", "Therapist 2", "Therapist 3", "Therapist 4"};
+    private final String[] meetingLinks = {
+            "https://meet.google.com/wam-vhkr-vyk", "https://meet.google.com/cnd-vydn-btm",
+            "https://meet.google.com/ote-ccof-cdb", "https://meet.google.com/znj-rmvg-xha",
+            "https://meet.google.com/jaa-voij-puu", "https://meet.google.com/qvi-vaqg-pia",
+            "https://meet.google.com/ipo-ugae-ftv", "https://meet.google.com/zhi-jfyb-kdn",
+            "https://meet.google.com/eix-feiu-gmt", "https://meet.google.com/urh-omnd-qye"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dr_consult);
 
-        // Toolbar setup
         toolbar = findViewById(R.id.toolbar);
         toolbarTitle = toolbar.findViewById(R.id.toolbar_right_text);
         toolbarLeftImage = toolbar.findViewById(R.id.toolbar_left_image);
@@ -60,117 +50,124 @@ public class dr_consult extends AppCompatActivity {
         toolbarTitle.setText("Consultation");
         toolbarLeftImage.setVisibility(View.GONE);
 
-        // Drawer setup
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.drawer_frag1, new DrawerFragment1()).commit();
 
         DrawerLayout drawerLayout = findViewById(R.id.dr_consult_page);
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer);
         drawerLayout.addDrawerListener(toggle);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
         toggle.syncState();
 
-        //the response from the child's side
-        TextView tvResponseStatus = findViewById(R.id.tv_response_status);
-        Button btnActionResponse = findViewById(R.id.btn_action_response);
+        usersRef = FirebaseDatabase.getInstance().getReference("Users");
+        consultationRef = FirebaseDatabase.getInstance().getReference("therapy_and_consultation");
 
-        // Get SharedPreferences
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String response = prefs.getString("appointment_response", "none"); // accepted or rescheduled
-        String reason = prefs.getString("reschedule_reason", "");
-
-        // Update UI based on response
-        if (response.equals("accepted")) {
-            tvResponseStatus.setText("Appointment Accepted by Child Side.");
-            btnActionResponse.setVisibility(View.VISIBLE);
-            btnActionResponse.setText("Confirm");
-        } else if (response.equals("rescheduled")) {
-            tvResponseStatus.setText("Appointment Rescheduled by Child Side.\nReason: " + reason);
-            btnActionResponse.setVisibility(View.VISIBLE);
-            btnActionResponse.setText("Reschedule Appointment");
-        } else {
-            tvResponseStatus.setText("Appointment response not received yet.");
-            btnActionResponse.setVisibility(View.GONE);
-        }
-
-
-        // Initialize views
         spinnerChildName = findViewById(R.id.spinner_child_name);
         spinnerChildDisorder = findViewById(R.id.spinner_child_disorder);
         etAppointmentDate = findViewById(R.id.et_appointment_date);
         etAppointmentTime = findViewById(R.id.et_appointment_time);
+        spinnerTherapist = findViewById(R.id.spinner_therapist);
+        etDoctorNote = findViewById(R.id.et_doctor_note);
+        btnSendRequest = findViewById(R.id.btn_send_request);
 
-        // Setup child name spinner
-        ArrayAdapter<String> childAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_spinner_item,
-                new String[]{"Select Child", "Vihan Jagtap", "Shourya Avate", "Sanchi Kasbe", "Janvi Satpute"}
-        );
-        childAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerChildName.setAdapter(childAdapter);
+        setupTherapistSpinner();
+        setupDateTimePickers();
+        loadChildrenFromFirebase();
 
-        // Disable disorder spinner initially
-        spinnerChildDisorder.setEnabled(false);
+        btnSendRequest.setOnClickListener(v -> sendConsultationRequest());
+    }
 
-        spinnerChildName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedChild = parent.getItemAtPosition(position).toString();
+    private void setupTherapistSpinner() {
+        ArrayAdapter<String> therapistAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, therapists);
+        therapistAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTherapist.setAdapter(therapistAdapter);
+    }
 
-                if (childDisorderMap.containsKey(selectedChild)) {
-                    String disorder = childDisorderMap.get(selectedChild);
-                    ArrayAdapter<String> disorderAdapter = new ArrayAdapter<>(
-                            dr_consult.this,
-                            android.R.layout.simple_spinner_item,
-                            new String[]{disorder}
-                    );
-                    disorderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerChildDisorder.setAdapter(disorderAdapter);
-                } else {
-                    spinnerChildDisorder.setAdapter(null);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // Optional: handle if needed
-            }
-        });
-
-        // Setup calendar-style DatePicker
+    private void setupDateTimePickers() {
         etAppointmentDate.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
-            int year = calendar.get(Calendar.YEAR);
-            int month = calendar.get(Calendar.MONTH);
-            int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(
-                    dr_consult.this,
-                    (view, selectedYear, selectedMonth, selectedDay) -> {
-                        String formattedDate = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
-                        etAppointmentDate.setText(formattedDate);
-                    },
-                    year, month, day
-            );
-            datePickerDialog.show();
+            new DatePickerDialog(dr_consult.this, (view, year, month, dayOfMonth) ->
+                    etAppointmentDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year),
+                    calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
         });
 
-        // Setup clock-style TimePicker
         etAppointmentTime.setOnClickListener(v -> {
             Calendar calendar = Calendar.getInstance();
-            int hour = calendar.get(Calendar.HOUR_OF_DAY);
-            int minute = calendar.get(Calendar.MINUTE);
-
-            TimePickerDialog timePickerDialog = new TimePickerDialog(
-                    dr_consult.this,
-                    (view, selectedHour, selectedMinute) -> {
-                        String formattedTime = String.format("%02d:%02d", selectedHour, selectedMinute);
-                        etAppointmentTime.setText(formattedTime);
-                    },
-                    hour, minute, true // Set 'false' if you want 12-hour with AM/PM
-            );
-            timePickerDialog.show();
+            new TimePickerDialog(dr_consult.this, (view, hourOfDay, minute) ->
+                    etAppointmentTime.setText(String.format("%02d:%02d", hourOfDay, minute)),
+                    calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show();
         });
+    }
+
+    private void loadChildrenFromFirebase() {
+        usersRef.get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && task.getResult() != null) {
+                DataSnapshot snapshot = task.getResult();
+                childList.clear();
+                disorderMap.clear();
+
+                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                    DataSnapshot childData = userSnapshot.child("ChildData");
+                    if (childData.exists()) {
+                        String name = childData.child("child_name").getValue(String.class);
+                        String disorder = childData.child("disability_type").getValue(String.class);
+                        if (name != null && !name.trim().isEmpty()) {
+                            childList.add(name);
+                            disorderMap.put(name, disorder != null ? disorder : "Not specified");
+                        }
+                    }
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(dr_consult.this, android.R.layout.simple_spinner_item, childList);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerChildName.setEnabled(true);
+                spinnerChildName.setAdapter(adapter);
+
+                spinnerChildName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        String child = childList.get(position);
+                        String disorder = null;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            disorder = disorderMap.getOrDefault(child, "Unknown");
+                        }
+                        ArrayAdapter<String> disorderAdapter = new ArrayAdapter<>(dr_consult.this, android.R.layout.simple_spinner_item, new String[]{disorder});
+                        spinnerChildDisorder.setEnabled(true);
+                        spinnerChildDisorder.setAdapter(disorderAdapter);
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {}
+                });
+            }
+        });
+    }
+
+    private void sendConsultationRequest() {
+        String child = spinnerChildName.getSelectedItem().toString();
+        String disorder = spinnerChildDisorder.getSelectedItem().toString();
+        String therapist = spinnerTherapist.getSelectedItem().toString();
+        String date = etAppointmentDate.getText().toString();
+        String time = etAppointmentTime.getText().toString();
+        String note = etDoctorNote.getText().toString();
+        String meetingLink = meetingLinks[new Random().nextInt(meetingLinks.length)];
+
+        if (child.isEmpty() || date.isEmpty() || time.isEmpty()) {
+            Toast.makeText(this, "Please complete all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        HashMap<String, Object> data = new HashMap<>();
+        data.put("therapist_name", therapist);
+        data.put("assignedDate", date);
+        data.put("assignedtime", time);
+        data.put("disorder", disorder);
+        data.put("doctorNote", note);
+        data.put("meetingLink", meetingLink);
+
+        String key = date.replace("/", "_") + "_" + time.replace(":", "-");
+        consultationRef.child(child).child(key).setValue(data)
+                .addOnSuccessListener(unused -> Toast.makeText(this, "Consultation scheduled", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(this, "Error scheduling consultation", Toast.LENGTH_SHORT).show());
     }
 }

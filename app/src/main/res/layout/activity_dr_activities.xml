@@ -2,161 +2,44 @@
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dr_activity_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/dr_activity_page"
     android:background="@color/skin"
-    android:layout_gravity="center"
     tools:context=".dr_activities">
+
+    <!-- Main content area -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
-        <include layout="@layout/toolbar"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Assign Therapy"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="@color/textcolour"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            tools:ignore="HardcodedText" />
+        <!-- Include Toolbar -->
+        <include layout="@layout/toolbar" />
 
-        <TextView
-            android:id="@+id/appointmentDetailsTextView"
+        <!-- Scrollable content -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:layout_marginBottom="16dp"
-            android:textColor="@color/textcolour"/>
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
+            <HorizontalScrollView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Time: "
-                android:textStyle="bold"
-                android:paddingEnd="8dp"
-                tools:ignore="HardcodedText" />
+                android:scrollbars="horizontal">
 
-            <EditText
-                android:id="@+id/etAppointmentTime"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="HH:MM"
-                android:focusable="false"
-                android:inputType="time"
-                tools:ignore="HardcodedText" />
-        </LinearLayout>
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="*">
-
-            <TableRow>
-                <TextView
-                    android:text="Time"
-                    android:textStyle="bold"
-                    android:padding="8dp"
-                    tools:ignore="HardcodedText" />
-                <TextView
-                    android:text="Child Name"
-                    android:textStyle="bold"
-                    android:padding="8dp"
-                    tools:ignore="HardcodedText" />
-                <TextView
-                    android:text="Therapist"
-                    android:textStyle="bold"
-                    android:padding="8dp"
-                    tools:ignore="HardcodedText" />
-                <TextView
-                    android:text="Activity Type"
-                    android:textStyle="bold"
-                    android:padding="8dp"
-                    tools:ignore="HardcodedText" />
-                <TextView
-                    android:text="Notes"
-                    android:textStyle="bold"
-                    android:padding="8dp"
-                    tools:ignore="HardcodedText" />
-            </TableRow>
-
-            <TableRow>
-                <TextView
-                    android:id="@+id/time1"
-                    android:text="Select Time"
-                    android:padding="8dp"
-                    tools:ignore="HardcodedText" />
-                <Spinner
-                    android:id="@+id/childNameSpinner1"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:id="@+id/table_container"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-                <Spinner
-                    android:id="@+id/therapistSpinner1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-                <Spinner
-                    android:id="@+id/activityTypeSpinner1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
-                <EditText
-                    android:id="@+id/notesEditText1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Optional notes"
-                    tools:ignore="HardcodedText" />
-            </TableRow>
-        </TableLayout>
+                    android:orientation="vertical" />
 
-        <Button
-            android:id="@+id/assignButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Assign Therapy"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            tools:ignore="HardcodedText" />
-
-        <TextView
-            android:id="@+id/assignedTherapiesTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Assigned Therapies:"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/textcolour"
-            tools:ignore="HardcodedText" />
-
-        <TextView
-            android:id="@+id/assignedListTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"
-            android:textColor="@android:color/black"/>
-
+            </HorizontalScrollView>
+        </ScrollView>
     </LinearLayout>
-    <include layout="@layout/fragment_drawer1"/>
+
+    <!-- Navigation Drawer -->
+    <include layout="@layout/fragment_drawer1" />
+
 </androidx.drawerlayout.widget.DrawerLayout>

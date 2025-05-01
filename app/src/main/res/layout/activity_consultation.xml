@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,83 +16,105 @@
 
         <include layout="@layout/toolbar"/>
 
-        <LinearLayout
-            android:id="@+id/consult_layout"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp"
-            android:background="@color/skin">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
 
-            <TextView
-                android:id="@+id/tv_child_info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:textColor="@color/textcolour"
-                android:paddingBottom="16dp" />
-
-            <RadioGroup
-                android:id="@+id/radio_group"
+            <LinearLayout
+                android:id="@+id/consult_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:background="@color/skin">
 
-                <RadioButton
-                    android:id="@+id/rb_accept"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15sp"
-                    android:textSize="18sp"
-                    android:text="Accept the Appointment Request" />
-
-                <RadioButton
-                    android:id="@+id/rb_reschedule"
-                    android:layout_width="wrap_content"
+                <!-- Meeting Information -->
+                <TextView
+                    android:id="@+id/tv_child_info"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
-                    android:layout_marginTop="15sp"
-                    android:text="Reschedule the appointment" />
-            </RadioGroup>
+                    android:textColor="@color/black"
+                    android:padding="16dp"
+                    android:background="@drawable/bg_card"
+                    android:elevation="4dp"
+                    android:text="Loading meeting info..."/>
 
-            <CheckBox
-                android:id="@+id/cb_day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reschedule the day"
-                android:visibility="gone"
-                android:textSize="16sp"/>
+                <!-- Decision Options -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Please select your response:"
+                    android:textColor="@color/textcolour"
+                    android:textSize="16sp"
+                    android:layout_marginTop="24dp"/>
 
-            <CheckBox
-                android:id="@+id/cb_week"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reschedule this week's appointment"
-                android:visibility="gone"
-                android:textSize="16sp"/>
+                <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp">
 
-            <EditText
-                android:id="@+id/et_reason"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter reason"
-                android:visibility="gone"
-                android:padding="8dp"
-                android:textColor="@color/black"/>
+                    <RadioButton
+                        android:id="@+id/rb_accept"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="✅ Accept Appointment"
+                        android:textSize="16sp"/>
 
-            <Button
-                android:id="@+id/btn_submit_response"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Submit Response"
-                android:layout_marginTop="20dp"
-                android:textStyle="bold"
-                android:textSize="18sp"
-                android:backgroundTint="@color/textcolour"
-                android:textColor="@color/skin"/>
-        </LinearLayout>
+                    <RadioButton
+                        android:id="@+id/rb_reschedule"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📅 Reschedule Appointment"
+                        android:textSize="16sp"
+                        android:layout_marginTop="12dp"/>
+                </RadioGroup>
+
+                <!-- Reschedule Options -->
+                <CheckBox
+                    android:id="@+id/cb_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reschedule to another day"
+                    android:visibility="gone"
+                    android:layout_marginTop="8dp"/>
+
+                <CheckBox
+                    android:id="@+id/cb_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reschedule full week"
+                    android:visibility="gone"/>
+
+                <EditText
+                    android:id="@+id/et_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter reason for rescheduling"
+                    android:visibility="gone"
+                    android:padding="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/edittext_bg"
+                    android:textColor="@color/black"/>
+
+                <Button
+                    android:id="@+id/btn_submit_response"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Submit Response"
+                    android:layout_marginTop="20dp"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/textcolour"
+                    android:textColor="@color/skin"/>
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
-    <include layout="@layout/fragment_drawer" />
+    <include layout="@layout/fragment_drawer"/>
 </androidx.drawerlayout.widget.DrawerLayout>

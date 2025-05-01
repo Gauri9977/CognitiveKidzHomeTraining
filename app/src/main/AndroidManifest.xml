@@ -193,7 +193,29 @@
 
         <!-- GameWebView -->
         <activity android:name=".GameWebView" />
+        <!-- WebView -->
+        <activity android:name=".webview" />
 
+        <!-- About Us -->
+        <activity
+            android:name=".AboutUsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar" />
+        <!-- Setting -->
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar" />
+        <!-- Account Privacy -->
+        <activity
+            android:name=".PrivacyActivity"
+            android:exported="false"
+            android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar" />
+        <!-- Terms and condition -->
+        <activity
+            android:name=".TermsCondition"
+            android:exported="false"
+            android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar" />
 
     </application>
 

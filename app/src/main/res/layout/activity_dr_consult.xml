@@ -12,8 +12,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <include layout="@layout/toolbar"/>
 
         <LinearLayout
@@ -55,7 +55,6 @@
                     tools:ignore="TouchTargetSizeCheck"
                     android:spinnerMode="dropdown"
                     android:enabled="false" />
-
             </LinearLayout>
 
             <!-- Child's Disorder -->
@@ -83,16 +82,15 @@
                     tools:ignore="TouchTargetSizeCheck"
                     android:spinnerMode="dropdown"
                     android:enabled="false" />
-
             </LinearLayout>
 
-
-            <!-- Consultation Appointment Date & Time -->
+            <!-- Consultation Appointment Date -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="8dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,11 +109,13 @@
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
+            <!-- Consultation Appointment Time -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="8dp">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -134,27 +134,51 @@
                     tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
 
-            <!-- Doctor Name -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Doctor: Dr. Nitin Chavan"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/textcolour"
-                android:padding="8dp"/>
-
-            <!-- Book Appointment Button -->
-            <Button
-                android:id="@+id/btn_book_appointment"
+            <!-- Therapist Spinner -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Book Schedule"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Therapist: "
+                    android:textSize="18sp"
+                    android:textColor="@color/textcolour"/>
+
+                <Spinner
+                    android:id="@+id/spinner_therapist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"
+                    android:textColor="@color/textcolour" />
+            </LinearLayout>
+
+            <!-- Doctor Note -->
+            <EditText
+                android:id="@+id/et_doctor_note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter notes or instructions"
+                android:minLines="3"
+                android:textColor="@color/textcolour"
+                android:textSize="16sp"
+                android:padding="8dp"
+                android:layout_marginTop="10dp"/>
+
+            <!-- Send Request Button -->
+            <Button
+                android:id="@+id/btn_send_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send Consultation Request"
                 android:textSize="18sp"
                 android:backgroundTint="@color/textcolour"
                 android:textColor="@color/skin"
                 android:padding="10dp"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="20dp"/>
 
             <!-- Reminder -->
             <TextView

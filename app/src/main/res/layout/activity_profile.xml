@@ -89,170 +89,37 @@
                     android:orientation="vertical"
                     android:padding="15dp">
 
-                    <!-- Reg No -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:id="@+id/tvRegNo"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="5dp"
-                            android:text="Reg. No: "
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-
+                    <!-- Hidden RegNo -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:visibility="gone">
+                        <TextView android:id="@+id/tvRegNo" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:padding="5dp" android:text="Reg. No: " android:textColor="@color/black" android:textSize="18sp" />
                     </LinearLayout>
 
-                    <!-- Birth Date -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                    <!-- Group: Core Identity -->
+                    <TextView android:id="@+id/tvChildName" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Name: " android:textColor="@color/black" android:textSize="18sp" />
+                    <TextView android:id="@+id/tvBirthDate" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Birth Date: " android:textColor="@color/black" android:textSize="18sp" />
+                    <TextView android:id="@+id/tvAge" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Age: " android:textColor="@color/black" android:textSize="18sp" />
+                    <TextView android:id="@+id/tvGender" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Gender: " android:textColor="@color/black" android:textSize="18sp" />
 
-                        <TextView
-                            android:id="@+id/tvBirthDate"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="5dp"
-                            android:text="Birth Date: "
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
+                    <!-- Group: Contact -->
+                    <TextView android:id="@+id/tvContact" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Contact: " android:textColor="@color/black" android:textSize="18sp" />
+                    <TextView android:id="@+id/tvEmail" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Email: " android:textColor="@color/black" android:textSize="18sp" />
 
-                    </LinearLayout>
+                    <!-- Group: Family -->
+                    <TextView android:id="@+id/tvCaregiver" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Caregiver: " android:textColor="@color/black" android:textSize="18sp" />
+                    <TextView android:id="@+id/tvRelation" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Relation: " android:textColor="@color/black" android:textSize="18sp" />
+                    <!-- <TextView android:id="@+id/tvRelationStatus" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Relationship Status: " android:textColor="@color/black" android:textSize="18sp" /> -->
 
-                    <!-- Age -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                    <!-- Group: Medical -->
+                    <TextView android:id="@+id/tvDisability" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Disorder: " android:textColor="@color/black" android:textSize="18sp" />
 
-                        <TextView
-                            android:id="@+id/tvAge"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="5dp"
-                            android:text="Age: "
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
+                    <!-- Group: Development -->
+                    <TextView android:id="@+id/tvSeverity" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Severity: " android:textColor="@color/black" android:textSize="18sp" />
+                    <!-- <TextView android:id="@+id/tvActivity" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Daily Activities: " android:textColor="@color/black" android:textSize="18sp" /> -->
+                    <TextView android:id="@+id/tvCommunication" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Communication: " android:textColor="@color/black" android:textSize="18sp" />
+                    <!-- <TextView android:id="@+id/tvBehavior" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="Behavioral Issues: " android:textColor="@color/black" android:textSize="18sp" /> -->
 
-                    </LinearLayout>
-
-                    <!-- Gender -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tvGender"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="5dp"
-                            android:text="Gender: "
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-
-                    </LinearLayout>
-
-                    <!-- Email -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tvEmail"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="5dp"
-                            android:text="Email ID: "
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-
-                    </LinearLayout>
-
-                    <!-- City -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tvCity"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="5dp"
-                            android:text="City: Pandharpur"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-
-                    </LinearLayout>
-
-                    <!-- Doctor -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tvDoctor"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="5dp"
-                            android:text="Doctor: Dr. Nitin Chavan"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-
-                    </LinearLayout>
-
-                    <!-- Paediatrician -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:id="@+id/tvPaediatrician"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="5dp"
-                            android:text="Paediatrician: Dr. Ganesh Patil"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-
-                    </LinearLayout>
-
-                    <!-- Disorder -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:id="@+id/tvDisorder"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="5dp"
-                            android:text="Disorder: "
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
-                    </LinearLayout>
-
+                    <!-- Address -->
+                    <TextView android:id="@+id/tvCity" android:layout_width="match_parent" android:layout_height="wrap_content" android:padding="5dp" android:text="City: " android:textColor="@color/black" android:textSize="18sp" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
@@ -260,5 +127,3 @@
 
     <include layout="@layout/fragment_drawer"/>
 </androidx.drawerlayout.widget.DrawerLayout>
-
-

@@ -87,7 +87,7 @@ public class home extends AppCompatActivity {
         });
         //report
         report.setOnClickListener(v -> {
-            Intent intent=new Intent(home.this,report.class);
+            Intent intent=new Intent(home.this,ReportChildDashboard.class);
             startActivity(intent);
         });
         //chatbot
