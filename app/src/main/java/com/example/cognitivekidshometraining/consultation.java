@@ -7,13 +7,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -27,57 +26,71 @@ public class consultation extends AppCompatActivity {
     TextView toolbar_title;
     ImageView toolbar_left_image;
     ActionBarDrawerToggle toggle;
+
     TextView tvChildInfo;
     RadioGroup radioGroup;
-    RadioButton rbAccept, rbReschedule, rbPostpone;
+    RadioButton rbAccept, rbReschedule;
+    CheckBox cbDay, cbWeek;
     EditText etReason;
     Button btnSubmit;
 
+    SharedPreferences sharedPreferences;
+    public static final String PREFS_NAME = "ConsultPrefs";
+    public static final String STATUS_KEY = "appointment_status";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultation);
 
+        // Toolbar setup
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
         toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
         toolbar_title.setText("Consultation");
         toolbar_left_image.setVisibility(View.GONE);
+        DrawerLayout drawer = findViewById(R.id.consult_drawer);
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
+        // Fragment drawer
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.drawer_frag, new DrawerFragment()).commit();
 
-        DrawerLayout drawer = findViewById(R.id.consult_drawer);
-        toggle = new ActionBarDrawerToggle(consultation.this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
-        drawer.addDrawerListener(toggle);
-
-        toggle.setToolbarNavigationClickListener(v ->{});
-        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
-
-        toggle.syncState();
-
-
+        // Bind views
         tvChildInfo = findViewById(R.id.tv_child_info);
         radioGroup = findViewById(R.id.radio_group);
+        rbAccept = findViewById(R.id.rb_accept);
+        rbReschedule = findViewById(R.id.rb_reschedule);
+        cbDay = findViewById(R.id.cb_day);
+        cbWeek = findViewById(R.id.cb_week);
         etReason = findViewById(R.id.et_reason);
         btnSubmit = findViewById(R.id.btn_submit_response);
 
-        // Fetch stored data
-        SharedPreferences sharedPreferences = getSharedPreferences("AppointmentData", MODE_PRIVATE);
-        String name = sharedPreferences.getString("childName", "Unknown");
-        String disorder = sharedPreferences.getString("childDisorder", "N/A");
-        String date = sharedPreferences.getString("date", "N/A");
-        String time = sharedPreferences.getString("time", "N/A");
-
+        // Set child info
+        SharedPreferences sp = getSharedPreferences("AppointmentData", MODE_PRIVATE);
+        String name = sp.getString("childName", "Unknown");
+        String disorder = sp.getString("childDisorder", "N/A");
+        String date = sp.getString("date", "N/A");
+        String time = sp.getString("time", "N/A");
         tvChildInfo.setText("Appointment for " + name + "\nDisorder: " + disorder + "\nDate: " + date + "\nTime: " + time);
 
+        // Radio button logic
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            etReason.setVisibility((checkedId == R.id.rb_reschedule || checkedId == R.id.rb_postpone)
-                    ? View.VISIBLE : View.GONE);
+            if (checkedId == R.id.rb_reschedule) {
+                cbDay.setVisibility(View.VISIBLE);
+                cbWeek.setVisibility(View.VISIBLE);
+                etReason.setVisibility(View.VISIBLE);
+            } else if (checkedId == R.id.rb_accept) {
+                cbDay.setVisibility(View.GONE);
+                cbWeek.setVisibility(View.GONE);
+                etReason.setVisibility(View.GONE);
+            }
         });
 
+        // Submit button
         btnSubmit.setOnClickListener(v -> {
             int selectedId = radioGroup.getCheckedRadioButtonId();
             if (selectedId == -1) {
@@ -85,15 +98,37 @@ public class consultation extends AppCompatActivity {
                 return;
             }
 
-            String response = ((RadioButton) findViewById(selectedId)).getText().toString();
-            String reason = etReason.getText().toString();
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
 
-            if ((selectedId == R.id.rb_reschedule || selectedId == R.id.rb_postpone) && reason.isEmpty()) {
-                Toast.makeText(this, "Please enter a reason", Toast.LENGTH_SHORT).show();
-                return;
+            if (selectedId == R.id.rb_accept) {
+                editor.putString("appointment_response", "accepted");
+                editor.putString("reschedule_reason", "");
+
+                // Save to additional SharedPreferences
+                SharedPreferences.Editor confirmEditor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+                confirmEditor.putString(STATUS_KEY, "Confirmed");
+                confirmEditor.apply();
+
+                Toast.makeText(this, "Appointment Confirmed", Toast.LENGTH_SHORT).show();
+            } else if (selectedId == R.id.rb_reschedule) {
+                if (!cbDay.isChecked() && !cbWeek.isChecked()) {
+                    Toast.makeText(this, "Please choose a reschedule option", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String reason = etReason.getText().toString().trim();
+                if (reason.isEmpty()) {
+                    Toast.makeText(this, "Please enter reason for rescheduling", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                editor.putString("appointment_response", "rescheduled");
+                editor.putString("reschedule_reason", reason);
+                Toast.makeText(this, "Rescheduling with reason: " + reason, Toast.LENGTH_LONG).show();
             }
 
-            Toast.makeText(this, "Response: " + response + "\n" + (reason.isEmpty() ? "" : "Reason: " + reason), Toast.LENGTH_LONG).show();
+            editor.apply();
         });
     }
 }

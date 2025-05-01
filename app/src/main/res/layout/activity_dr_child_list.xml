@@ -8,12 +8,12 @@
     android:background="@color/blue"
     android:layout_gravity="center"
     tools:context=".dr_home">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-
         <include layout="@layout/toolbar"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,8 +36,8 @@
                 android:id="@+id/childrenRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/childlist_itemview"
-                android:paddingBottom="30dp"/>
+                android:paddingBottom="30dp"
+                tools:listitem="@layout/childlist_itemview" />
 
         </LinearLayout>
     </LinearLayout>

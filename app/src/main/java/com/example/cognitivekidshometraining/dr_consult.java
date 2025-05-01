@@ -2,7 +2,6 @@ package com.example.cognitivekidshometraining;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -15,170 +14,163 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.widget.TextView;
+import android.widget.Button;
+
 
 public class dr_consult extends AppCompatActivity {
 
-    Toolbar toolbar;
-    TextView toolbar_title;
-    ImageView toolbar_left_image;
-    ActionBarDrawerToggle toggle;
+    private Toolbar toolbar;
+    private TextView toolbarTitle;
+    private ImageView toolbarLeftImage;
+    private ActionBarDrawerToggle toggle;
 
-    EditText etName, etDisorder, etDate, etTime;
-    Button btnBook;
-    Spinner spinnerChildName;
+    private EditText etAppointmentDate, etAppointmentTime;
+    private Spinner spinnerChildName, spinnerChildDisorder;
 
-    private DatabaseReference usersRef;
-    private Map<String, String> childUidMap = new HashMap<>();
-
-    String selectedName;
+    // Map for storing child name and disorder mapping
+    private final HashMap<String, String> childDisorderMap = new HashMap<String, String>() {{
+        put("Vihan Jagtap", "Autism Spectrum Disorder");
+        put("Shourya Avate", "IQ/DQ");
+        put("Sanchi Kasbe", "ASD");
+        put("Janvi Satpute", "ADHD");
+    }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dr_consult);
 
-        usersRef = FirebaseDatabase.getInstance().getReference("Users");
-        fetchChildren();
-
+        // Toolbar setup
         toolbar = findViewById(R.id.toolbar);
-        toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
-        toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
-        toolbar_title.setText("Consultation");
-        toolbar_left_image.setVisibility(View.GONE);
+        toolbarTitle = toolbar.findViewById(R.id.toolbar_right_text);
+        toolbarLeftImage = toolbar.findViewById(R.id.toolbar_left_image);
 
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.drawer_frag1, new DrawerFragment1()).commit();
+        toolbarTitle.setText("Consultation");
+        toolbarLeftImage.setVisibility(View.GONE);
 
-        DrawerLayout drawer = findViewById(R.id.dr_consult_page);
-        toggle = new ActionBarDrawerToggle(dr_consult.this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
-        drawer.addDrawerListener(toggle);
+        // Drawer setup
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.drawer_frag1, new DrawerFragment1()).commit();
 
-        toggle.setToolbarNavigationClickListener(v ->{});
+        DrawerLayout drawerLayout = findViewById(R.id.dr_consult_page);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.openDrawer, R.string.closeDrawer);
+        drawerLayout.addDrawerListener(toggle);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
-
         toggle.syncState();
 
-        etName = findViewById(R.id.et_child_name);
-        etDisorder = findViewById(R.id.et_child_disorder);
-        etDate = findViewById(R.id.et_appointment_date);
-        etTime = findViewById(R.id.et_appointment_time);
-        btnBook = findViewById(R.id.btn_book_appointment);
-        spinnerChildName = findViewById(R.id.spinnerChildName);
+        //the response from the child's side
+        TextView tvResponseStatus = findViewById(R.id.tv_response_status);
+        Button btnActionResponse = findViewById(R.id.btn_action_response);
 
-        etDisorder.setEnabled(false);
+        // Get SharedPreferences
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String response = prefs.getString("appointment_response", "none"); // accepted or rescheduled
+        String reason = prefs.getString("reschedule_reason", "");
 
-        etDate.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            new DatePickerDialog(this,
-                    (view, year, month, day) ->
-                            etDate.setText(day + "/" + (month + 1) + "/" + year),
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH)).show();
-        });
+        // Update UI based on response
+        if (response.equals("accepted")) {
+            tvResponseStatus.setText("Appointment Accepted by Child Side.");
+            btnActionResponse.setVisibility(View.VISIBLE);
+            btnActionResponse.setText("Confirm");
+        } else if (response.equals("rescheduled")) {
+            tvResponseStatus.setText("Appointment Rescheduled by Child Side.\nReason: " + reason);
+            btnActionResponse.setVisibility(View.VISIBLE);
+            btnActionResponse.setText("Reschedule Appointment");
+        } else {
+            tvResponseStatus.setText("Appointment response not received yet.");
+            btnActionResponse.setVisibility(View.GONE);
+        }
 
-        etTime.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            new TimePickerDialog(this,
-                    (view, hour, minute) ->
-                            etTime.setText(String.format("%02d:%02d", hour, minute)),
-                    calendar.get(Calendar.HOUR_OF_DAY),
-                    calendar.get(Calendar.MINUTE), true).show();
-        });
 
-        btnBook.setOnClickListener(v -> {
-            String name = etName.getText().toString().trim();
-            String disorder = etDisorder.getText().toString().trim();
-            String date = etDate.getText().toString().trim();
-            String time = etTime.getText().toString().trim();
+        // Initialize views
+        spinnerChildName = findViewById(R.id.spinner_child_name);
+        spinnerChildDisorder = findViewById(R.id.spinner_child_disorder);
+        etAppointmentDate = findViewById(R.id.et_appointment_date);
+        etAppointmentTime = findViewById(R.id.et_appointment_time);
 
-            if (selectedName.isEmpty() || disorder.isEmpty() || date.isEmpty() || time.isEmpty()) {
-                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-                return;
-            }
+        // Setup child name spinner
+        ArrayAdapter<String> childAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                new String[]{"Select Child", "Vihan Jagtap", "Shourya Avate", "Sanchi Kasbe", "Janvi Satpute"}
+        );
+        childAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerChildName.setAdapter(childAdapter);
 
-            // Store appointment details using SharedPreferences
-            SharedPreferences sharedPreferences = getSharedPreferences("AppointmentData", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("childName", selectedName);
-            editor.putString("childDisorder", disorder);
-            editor.putString("date", date);
-            editor.putString("time", time);
-            editor.apply();
+        // Disable disorder spinner initially
+        spinnerChildDisorder.setEnabled(false);
 
-            // Just show toast, do NOT go to consultation screen
-            Toast.makeText(this, "Appointment request sent to " + selectedName, Toast.LENGTH_LONG).show();
-        });
-    }
+        spinnerChildName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedChild = parent.getItemAtPosition(position).toString();
 
-    private void fetchChildren() {
-        usersRef.get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
-                List<String> childNames = new ArrayList<>();
-
-                for (DataSnapshot userSnapshot : task.getResult().getChildren()) {
-                    String uid = userSnapshot.getKey();
-                    String name = userSnapshot.child("ChildData/child_name").getValue(String.class);
-
-                    if (name != null) {
-                        childNames.add(name);
-                        childUidMap.put(name, uid); // Store mapping
-                    }
+                if (childDisorderMap.containsKey(selectedChild)) {
+                    String disorder = childDisorderMap.get(selectedChild);
+                    ArrayAdapter<String> disorderAdapter = new ArrayAdapter<>(
+                            dr_consult.this,
+                            android.R.layout.simple_spinner_item,
+                            new String[]{disorder}
+                    );
+                    disorderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerChildDisorder.setAdapter(disorderAdapter);
+                } else {
+                    spinnerChildDisorder.setAdapter(null);
                 }
+            }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, childNames);
-                spinnerChildName.setAdapter(adapter);
-
-                spinnerChildName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        selectedName = parent.getItemAtPosition(position).toString();
-                        String uid = childUidMap.get(selectedName);
-                        fetchDisorderForChild(uid);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {}
-                });
-
-            } else {
-                Toast.makeText(this, "Failed to load children", Toast.LENGTH_SHORT).show();
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Optional: handle if needed
             }
         });
-    }
 
-    private void fetchDisorderForChild(String uid) {
-        usersRef.child(uid).child("ChildData").child("disability_type")
-                .get().addOnSuccessListener(snapshot -> {
-                    String disorder = snapshot.getValue(String.class);
-                    if (disorder != null) {
-                        etDisorder.setText(disorder);
-                    } else {
-                        etDisorder.setText("Disorder: Not specified");
-                    }
-                }).addOnFailureListener(e -> {
-                    etDisorder.setText("Error fetching disorder");
-                });
+        // Setup calendar-style DatePicker
+        etAppointmentDate.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH);
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    dr_consult.this,
+                    (view, selectedYear, selectedMonth, selectedDay) -> {
+                        String formattedDate = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
+                        etAppointmentDate.setText(formattedDate);
+                    },
+                    year, month, day
+            );
+            datePickerDialog.show();
+        });
+
+        // Setup clock-style TimePicker
+        etAppointmentTime.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            int minute = calendar.get(Calendar.MINUTE);
+
+            TimePickerDialog timePickerDialog = new TimePickerDialog(
+                    dr_consult.this,
+                    (view, selectedHour, selectedMinute) -> {
+                        String formattedTime = String.format("%02d:%02d", selectedHour, selectedMinute);
+                        etAppointmentTime.setText(formattedTime);
+                    },
+                    hour, minute, true // Set 'false' if you want 12-hour with AM/PM
+            );
+            timePickerDialog.show();
+        });
     }
 }
