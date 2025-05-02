@@ -46,5 +46,8 @@
     <color name="text_black">#000000</color>
     <color name="text_white">#FFFFFF</color>
 
+    <color name="gray_light">#D3D3D3</color> <!-- Light Gray for Card Background -->
+    <color name="gray_dark">#A9A9A9</color>  <!-- Darker Gray for Text or Headers -->
+
 </resources>
 
