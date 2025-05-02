@@ -69,11 +69,11 @@ public class home extends AppCompatActivity {
         });
         //academic activity
         academic_linear_layout.setOnClickListener(v -> {
-            Toast.makeText(home.this, "Academic Activities will be available soon. Stay tuned!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(home.this, "Academic Activities will be available soon. Stay tuned!", Toast.LENGTH_SHORT).show();
 
             // Uncomment below lines once feature is ready
-            // Intent intent = new Intent(home.this, academic_activity.class);
-            // startActivity(intent);
+            Intent intent = new Intent(home.this, child_activity.class);
+            startActivity(intent);
         });
         //consultation
         consultation.setOnClickListener(v ->{

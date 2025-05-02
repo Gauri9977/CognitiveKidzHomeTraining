@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="16dp"
+    android:layout_margin="8dp"
+    android:backgroundTint="#e0f7fa"
+    android:elevation="4dp">
+
+    <TextView
+        android:id="@+id/card_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/textcolour"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/card_line1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Line1"
+        android:textSize="18sp"
+        android:textColor="@color/textcolour" />
+
+    <TextView
+        android:id="@+id/card_line2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Line2"
+        android:textSize="18sp"
+        android:textColor="@color/textcolour" />
+
+    <TextView
+        android:id="@+id/card_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#16A89A" />
+</LinearLayout>

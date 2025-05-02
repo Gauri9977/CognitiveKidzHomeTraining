@@ -216,6 +216,11 @@
             android:name=".TermsCondition"
             android:exported="false"
             android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar" />
+        <!-- Academic ACtivities -->
+        <activity
+            android:name=".child_activity"
+            android:exported="false"
+            android:theme="@style/Theme.CognitiveKidsHomeTraining.NoActionBar" />
 
     </application>
 

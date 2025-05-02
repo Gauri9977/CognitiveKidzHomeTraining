@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +34,7 @@ public class todo extends AppCompatActivity {
     private HashMap<String, String> activityUrls = new HashMap<>();
     private ListView todoListView;
     private TextView assignedDateTextView, footerMessage;
+    private String childName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class todo extends AppCompatActivity {
         todoListView = findViewById(R.id.todo_listview);
         assignedDateTextView = findViewById(R.id.assigned_date);
         footerMessage = findViewById(R.id.footer_message);
+
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -51,7 +52,9 @@ public class todo extends AppCompatActivity {
 
         todoListView.setOnItemClickListener((parent, view, position, id) -> {
             ActivityItem clicked = (ActivityItem) parent.getItemAtPosition(position);
-            if (!clicked.isHeader) handleActivityClick(clicked.text);
+            if (!clicked.isHeader) {
+                handleActivityClick(clicked.text);
+            }
         });
 
         loadAssignedActivities();
@@ -82,7 +85,7 @@ public class todo extends AppCompatActivity {
         mDatabase.child(USERS).child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String childName = snapshot.child(CHILD_DATA).child(CHILD_NAME).getValue(String.class);
+                childName = snapshot.child(CHILD_DATA).child(CHILD_NAME).getValue(String.class);
                 if (childName != null) {
                     fetchAllActivities(childName);
                 } else {
@@ -156,19 +159,23 @@ public class todo extends AppCompatActivity {
     private void handleActivityClick(String activityName) {
         for (String key : activityUrls.keySet()) {
             if (activityName.contains(key)) {
-                openWebLink(activityUrls.get(key));
+                String url = activityUrls.get(key);
+                openWebLink(url, key);  // pass actual activity name
                 return;
             }
         }
         Toast.makeText(this, "This activity is offline or no link found.", Toast.LENGTH_SHORT).show();
     }
 
-    private void openWebLink(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+    private void openWebLink(String url, String activityName) {
+        Intent intent = new Intent(todo.this, GameWebView.class);
+        intent.putExtra("url", url);
+        intent.putExtra("child_name", childName); // ✅ Actual child name
+        intent.putExtra("activity_name", activityName); // ✅ Optional tracking
         startActivity(intent);
     }
 
-    // Helper class for adapter
+    // Helper class
     private static class ActivityItem {
         public boolean isHeader;
         public String text;
