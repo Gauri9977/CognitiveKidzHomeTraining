@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/skin"
         android:orientation="vertical">
 
         <!-- Header Title -->
@@ -21,7 +22,7 @@
             android:text="Privacy and Terms"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:textColor="@color/primary"
+            android:textColor="@color/textcolour"
             android:layout_gravity="center"
             android:layout_marginBottom="20dp"
             android:letterSpacing="0.05" />

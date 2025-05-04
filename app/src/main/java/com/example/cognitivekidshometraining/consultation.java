@@ -46,7 +46,7 @@ public class consultation extends AppCompatActivity {
         // Setup UI
         toolbar = findViewById(R.id.toolbar);
         toolbarTitle = toolbar.findViewById(R.id.toolbar_right_text);
-        toolbarTitle.setText("Consultation");
+        toolbarTitle.setText("📅 Consultation");
         drawer = findViewById(R.id.consult_drawer);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
         drawer.addDrawerListener(toggle);

@@ -10,8 +10,12 @@ import android.widget.TextView;
 import android.view.View;
 
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
@@ -21,6 +25,10 @@ import java.util.*;
 
 public class rewards extends AppCompatActivity {
 
+    Toolbar toolbar;
+    TextView toolbar_title;
+    ImageView toolbar_left_image;
+    ActionBarDrawerToggle toggle;
     private LinearLayout badgeContainer, stickerContainer, trophyContainer, certificateContainer;
     private DatabaseReference db;
     private String childName;
@@ -39,12 +47,25 @@ public class rewards extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rewards);
 
-        // Toolbar setup
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        TextView toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
-        ImageView toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
-        toolbar_title.setText("Rewards");
+        toolbar = findViewById(R.id.toolbar);
+        toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
+        toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
+        toolbar_title.setText("\uD83C\uDFC6 Rewards");
         toolbar_left_image.setVisibility(View.GONE);
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.drawer_frag, new DrawerFragment()).commit();
+
+        DrawerLayout drawer = findViewById(R.id.reward_drawer_layout);
+        toggle = new ActionBarDrawerToggle(rewards.this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
+        drawer.addDrawerListener(toggle);
+
+        toggle.setToolbarNavigationClickListener(v ->{});
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
+
+        toggle.syncState();
+
 
         badgeContainer = findViewById(R.id.badge_container);
         stickerContainer = findViewById(R.id.sticker_container);

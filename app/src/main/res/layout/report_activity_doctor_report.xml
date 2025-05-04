@@ -1,10 +1,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/skin"
+    >
 
     <LinearLayout
         android:orientation="vertical"
         android:padding="16dp"
+        android:layout_marginTop="12sp"
+        android:background="@color/skin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -13,78 +17,99 @@
             android:id="@+id/dateText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="22sp"
+            android:textColor="@color/textcolour"
+            android:layout_marginBottom="8sp"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/childName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="18sp"
+            android:textColor="@color/textcolour"
+            android:layout_marginBottom="5sp"
+            />
 
         <TextView
             android:id="@+id/age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="18sp"
+            android:textColor="@color/textcolour"
+            android:layout_marginBottom="5sp"
+            />
 
         <TextView
             android:id="@+id/disorder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="18sp"
+            android:textColor="@color/textcolour"
+            android:layout_marginBottom="5sp"
+            />
 
         <TextView
             android:id="@+id/doctorName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="18sp"
+            android:textColor="@color/textcolour"
+            android:layout_marginBottom="5sp"
+            />
 
         <TextView
             android:id="@+id/therapiesCompleted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="18sp"
+            android:textColor="@color/textcolour"
+            android:layout_marginBottom="5sp"/>
 
         <TextView
             android:id="@+id/therapiesMissed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="18sp"
+            android:textColor="@color/textcolour"
+            android:layout_marginBottom="5sp"
+            />
 
         <TextView
             android:id="@+id/activitiesCompleted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="18sp"
+            android:textColor="@color/textcolour"
+            android:layout_marginBottom="5sp"
+            />
 
         <TextView
             android:id="@+id/activitiesMissed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="18sp"
+            android:textColor="@color/textcolour"
+            android:layout_marginBottom="5sp"
+            />
 
         <TextView
             android:id="@+id/testsResults"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="18sp"
+            android:textColor="@color/textcolour"
+            android:layout_marginBottom="5sp"
+            />
 
         <TextView
             android:id="@+id/clinicalObservation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="18sp"
+            android:textColor="@color/textcolour"
+            android:layout_marginBottom="5sp"
+            />
 
         <!-- EditText for Doctor's Note -->
         <EditText

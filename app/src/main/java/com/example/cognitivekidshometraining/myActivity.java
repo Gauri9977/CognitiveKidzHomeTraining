@@ -40,7 +40,7 @@ public class myActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
         toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
-        toolbar_title.setText("My Past Activities");
+        toolbar_title.setText("\uD83D\uDCDA My Past Activities");
         toolbar_left_image.setVisibility(View.GONE);
 
         mAuth = FirebaseAuth.getInstance();

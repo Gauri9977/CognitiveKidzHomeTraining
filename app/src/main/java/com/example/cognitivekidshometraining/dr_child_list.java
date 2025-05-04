@@ -50,21 +50,16 @@ public class dr_child_list extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
         toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
-        toolbar_title.setText("Assign Activities");
+        toolbar_title.setText("\uD83D\uDC64 Client Demographics");
         toolbar_left_image.setVisibility(View.GONE);
-
-
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.drawer_frag1, new DrawerFragment1()).commit();
-
         DrawerLayout drawer = findViewById(R.id.dr_child_list);
         toggle = new ActionBarDrawerToggle(dr_child_list.this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
         drawer.addDrawerListener(toggle);
-
         toggle.setToolbarNavigationClickListener(v ->{});
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
-
         toggle.syncState();
 
 

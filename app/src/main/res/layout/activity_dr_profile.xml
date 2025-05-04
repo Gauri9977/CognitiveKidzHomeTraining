@@ -31,7 +31,7 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="25dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="15dp"
                     android:src="@drawable/doctor2" />
 
@@ -39,20 +39,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nitin Chavan"
+                    android:text="Dr. Nitin Chavan"
                     android:textColor="@color/textcolour"
-                    android:textSize="20sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     android:gravity="center" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="+91 - 9876543210"
+                    android:text="Director at Sense Rehab, Pandharpur"
                     android:textColor="@color/textcolour"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:gravity="center"
                     android:layout_marginBottom="20dp" />
+
 
                 <!-- Card-style detail box -->
                 <LinearLayout
@@ -66,23 +67,39 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Birth Date: 25/11/1978" />
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
+                        android:text="Birth Date: 15/06/1982" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Age: 47 years"
+                        android:text="Age: 42 years"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
+                        android:layout_marginTop="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact No.: +91 - 8890174545"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
                         android:layout_marginTop="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Gender: Male"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
                         android:layout_marginTop="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
                         android:text="Email-ID: nchavan00@gmail.com"
                         android:layout_marginTop="5dp" />
 
@@ -90,42 +107,64 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="City: Pandharpur"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
                         android:layout_marginTop="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Degree: MBBS, MD - Pediatric Neurology"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
+                        android:text="Qualification : MBBS, MD - Pediatric Neurology"
                         android:layout_marginTop="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
                         android:text="Specialization: Autism and Child Development"
                         android:layout_marginTop="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Experience: 12+ years"
+                        android:text="Experience: 13 years"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
                         android:layout_marginTop="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="License: Active (Maharashtra Medical Council)"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
+                        android:text="Council Name: Maharashtra Medical Council"
                         android:layout_marginTop="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hospital: Sense Rehab, Pandharpur"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
+                        android:text="License: Active "
                         android:layout_marginTop="5dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Timings: 10:00 AM - 06:00 PM"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
+                        android:text="Affiliation: Mathura Child Neuro Clinic, Navi Peth, Solapur"
+                        android:layout_marginTop="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="@color/textcolour"
+                        android:text="Available Timing: 10:00 AM - 06:00 PM"
                         android:layout_marginTop="5dp" />
                 </LinearLayout>
 

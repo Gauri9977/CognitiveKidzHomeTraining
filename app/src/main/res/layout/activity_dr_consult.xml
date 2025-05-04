@@ -180,41 +180,7 @@
                 android:padding="10dp"
                 android:layout_marginTop="20dp"/>
 
-            <!-- Reminder -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Reminder: \nPlease arrive on time for your appointment."
-                android:textSize="16sp"
-                android:textColor="@color/textcolour"
-                android:padding="8dp"
-                android:gravity="center"
-                android:layout_gravity="center"/>
-
         </LinearLayout>
-
-        <!-- Response Status -->
-        <TextView
-            android:id="@+id/tv_response_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Appointment response not received yet."
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:padding="8dp" />
-
-        <Button
-            android:id="@+id/btn_action_response"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Take Action"
-            android:backgroundTint="@color/textcolour"
-            android:textColor="@color/skin"
-            android:visibility="gone"
-            android:layout_marginTop="10dp" />
 
     </LinearLayout>
     <include layout="@layout/fragment_drawer1"/>

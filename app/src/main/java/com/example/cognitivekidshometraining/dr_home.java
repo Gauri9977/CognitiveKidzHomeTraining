@@ -37,11 +37,12 @@ public class dr_home extends AppCompatActivity {
         LinearLayout child_details=findViewById(R.id.reward_linear_layout1);
         LinearLayout report=findViewById(R.id.weeklyreport_linear_layout1);
         LinearLayout dr_profile= findViewById(R.id.myactivity_home);
+        LinearLayout chatbot=findViewById(R.id.chatbot_linear_layout);
 
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
         toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
-        toolbar_title.setText("Doctor's Home");
+        toolbar_title.setText("Home");
         toolbar_left_image.setVisibility(View.GONE);
 
         FragmentManager manager = getSupportFragmentManager();
@@ -90,6 +91,12 @@ public class dr_home extends AppCompatActivity {
         //Doctorside report
         report.setOnClickListener(v -> {
             Intent intent=new Intent(dr_home.this,ReportDoctorDashboardActivity.class);
+            startActivity(intent);
+        });
+
+        //chatbot
+        chatbot.setOnClickListener(v -> {
+            Intent intent = new Intent(dr_home.this, ChatbotActivity.class);
             startActivity(intent);
         });
     }

@@ -42,19 +42,14 @@ public class home extends AppCompatActivity {
         toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
         toolbar_title.setText("Home");
         toolbar_left_image.setVisibility(View.GONE);
-
-
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.drawer_frag, new DrawerFragment()).commit();
-
         DrawerLayout drawer = findViewById(R.id.home_screen_drawer);
         toggle = new ActionBarDrawerToggle(home.this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
         drawer.addDrawerListener(toggle);
-
         toggle.setToolbarNavigationClickListener(v ->{});
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
-
         toggle.syncState();
 
         //daily agenda

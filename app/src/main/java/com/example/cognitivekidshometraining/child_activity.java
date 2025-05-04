@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 public class child_activity extends AppCompatActivity {
-
     private Toolbar toolbar;
     private TextView toolbarTitle;
     private ImageView toolbarLeftImage;
@@ -31,7 +30,7 @@ public class child_activity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         toolbarTitle = toolbar.findViewById(R.id.toolbar_right_text);
         toolbarLeftImage = toolbar.findViewById(R.id.toolbar_left_image);
-        toolbarTitle.setText("Academic");
+        toolbarTitle.setText("\uD83D\uDCDA Academic Activity");
         toolbarLeftImage.setVisibility(View.GONE);
 
         FragmentManager manager = getSupportFragmentManager();

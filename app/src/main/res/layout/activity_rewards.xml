@@ -6,19 +6,20 @@
     android:id="@+id/reward_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/skin"
     tools:context=".rewards">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <include layout="@layout/toolbar" />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="@color/skin"
             android:padding="16dp">
 
             <LinearLayout

@@ -63,8 +63,8 @@ public class ReportDoctorReportActivity extends AppCompatActivity {
         therapiesMissed.setText("Therapies Missed: " + report.therapiesMissed);
         activitiesCompleted.setText("Activities Completed: " + report.activitiesCompleted);
         activitiesMissed.setText("Activities Missed: " + report.activitiesMissed);
-        testsResults.setText(report.testsAndResults);
-        clinicalObservation.setText(report.clinicalObservation);
+        testsResults.setText("Test Results: " +report.testsAndResults);
+        clinicalObservation.setText("Clinical Observations: " +report.clinicalObservation);
 
         // Determine if today is the report date
         String today = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(new Date());

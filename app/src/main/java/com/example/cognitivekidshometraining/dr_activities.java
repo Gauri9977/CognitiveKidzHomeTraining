@@ -46,7 +46,7 @@ public class dr_activities extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
-        toolbar_title.setText("Consultation Schedule");
+        toolbar_title.setText("⏰ Consultation Schedule");
 
         DrawerLayout drawer = findViewById(R.id.dr_activity_page);
         toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
