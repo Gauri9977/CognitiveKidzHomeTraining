@@ -2,6 +2,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/skin"
     android:padding="12dp">
 
     <TextView
@@ -10,12 +11,16 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Week of [date]"
-        android:textSize="16sp"
-        android:textColor="#000000" />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/textcolour" />
 
     <Button
         android:id="@+id/viewReportButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Report" />
+        android:text="View Report"
+        android:backgroundTint="@color/textcolour"
+        android:textColor="@color/skin"
+        />
 </LinearLayout>

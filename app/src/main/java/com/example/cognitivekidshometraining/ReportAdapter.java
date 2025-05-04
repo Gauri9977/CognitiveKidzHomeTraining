@@ -42,12 +42,12 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         holder.activitiesCompleted.setText("Activities Completed: " + report.activitiesCompleted);
         holder.activitiesMissed.setText("Activities Missed: " + report.activitiesMissed);
 
-        holder.testsResults.setText(report.testsAndResults);
-        holder.clinicalObservation.setText(report.clinicalObservation);
+        holder.testsResults.setText("Test Results: "+report.testsAndResults);
+        holder.clinicalObservation.setText("Clinical Observations: "+report.clinicalObservation);
 
         // Handling doctor's note visibility
         if (report.doctorNote != null && !report.doctorNote.isEmpty()) {
-            holder.doctorNote.setText(report.doctorNote);
+            holder.doctorNote.setText("Doctor's Note: "+report.doctorNote);
         } else {
             holder.doctorNote.setText("Doctor's note is unavailable.");
         }

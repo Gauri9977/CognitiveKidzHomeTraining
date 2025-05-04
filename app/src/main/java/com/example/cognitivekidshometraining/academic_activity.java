@@ -5,17 +5,28 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 
 public class academic_activity extends AppCompatActivity {
 
+    Toolbar toolbar;
+    TextView toolbar_title;
+    ImageView toolbar_left_image;
+    ActionBarDrawerToggle toggle;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private String childName;
@@ -24,6 +35,22 @@ public class academic_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_academic);
+
+        toolbar = findViewById(R.id.toolbar);
+        toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
+        toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
+        toolbar_title.setText("\uD83C\uDFAF Activities");
+        toolbar_left_image.setVisibility(View.GONE);
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.drawer_frag, new DrawerFragment()).commit();
+        DrawerLayout drawer = findViewById(R.id.drawer_academic_activity);
+        toggle = new ActionBarDrawerToggle(academic_activity.this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
+        drawer.addDrawerListener(toggle);
+        toggle.setToolbarNavigationClickListener(v ->{});
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
+        toggle.syncState();
+
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();

@@ -4,32 +4,37 @@
     android:layout_width="match_parent"
     android:layout_margin="8dp"
     android:layout_height="wrap_content"
+    android:layout_marginTop="10sp"
     card_view:cardCornerRadius="12dp"
+    android:background="@color/skin"
     card_view:cardElevation="6dp">
 
     <ScrollView
         android:layout_width="match_parent"
+        android:background="@color/skin"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="vertical"
             android:padding="16dp"
+            android:background="@color/skin"
+            android:layout_marginTop="10sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <!-- Static report fields -->
-            <TextView android:id="@+id/dateText" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <TextView android:id="@+id/childName" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <TextView android:id="@+id/age" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <TextView android:id="@+id/disorder" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <TextView android:id="@+id/doctorName" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <TextView android:id="@+id/therapiesCompleted" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <TextView android:id="@+id/therapiesMissed" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <TextView android:id="@+id/activitiesCompleted" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <TextView android:id="@+id/activitiesMissed" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <TextView android:id="@+id/testsResults" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <TextView android:id="@+id/clinicalObservation" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <TextView android:id="@+id/doctorNote" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <TextView android:id="@+id/dateText" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="22sp" android:textStyle="bold" android:layout_marginBottom="8sp"/>
+            <TextView android:id="@+id/childName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="18sp" android:layout_marginBottom="5sp"/>
+            <TextView android:id="@+id/age" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="18sp" android:layout_marginBottom="5sp"/>
+            <TextView android:id="@+id/disorder" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="18sp" android:layout_marginBottom="5sp"/>
+            <TextView android:id="@+id/doctorName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="18sp" android:layout_marginBottom="5sp"/>
+            <TextView android:id="@+id/therapiesCompleted" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="18sp" android:layout_marginBottom="5sp"/>
+            <TextView android:id="@+id/therapiesMissed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="18sp" android:layout_marginBottom="5sp"/>
+            <TextView android:id="@+id/activitiesCompleted" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="18sp" android:layout_marginBottom="5sp"/>
+            <TextView android:id="@+id/activitiesMissed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="18sp" android:layout_marginBottom="5sp"/>
+            <TextView android:id="@+id/testsResults" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="18sp" android:layout_marginBottom="5sp"/>
+            <TextView android:id="@+id/clinicalObservation" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="18sp" android:layout_marginBottom="5sp"/>
+            <TextView android:id="@+id/doctorNote" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/textcolour" android:textSize="18sp" android:layout_marginBottom="5sp"/>
 
             <!-- Doctor Edit Section (Visible only on edit day) -->
             <EditText

@@ -16,7 +16,6 @@ import com.google.firebase.database.*;
 import java.util.*;
 
 public class dr_consult extends AppCompatActivity {
-
     private Toolbar toolbar;
     private TextView toolbarTitle;
     private ImageView toolbarLeftImage;
@@ -28,7 +27,6 @@ public class dr_consult extends AppCompatActivity {
 
     private final List<String> childList = new ArrayList<>();
     private final HashMap<String, String> disorderMap = new HashMap<>();
-
     private final String[] therapists = {"Nitin Chavan", "Therapist 1", "Therapist 2", "Therapist 3", "Therapist 4"};
     private final String[] meetingLinks = {
             "https://meet.google.com/wam-vhkr-vyk", "https://meet.google.com/cnd-vydn-btm",
@@ -47,7 +45,7 @@ public class dr_consult extends AppCompatActivity {
         toolbarTitle = toolbar.findViewById(R.id.toolbar_right_text);
         toolbarLeftImage = toolbar.findViewById(R.id.toolbar_left_image);
 
-        toolbarTitle.setText("Consultation");
+        toolbarTitle.setText("📅 Consultation");
         toolbarLeftImage.setVisibility(View.GONE);
 
         FragmentManager fragmentManager = getSupportFragmentManager();

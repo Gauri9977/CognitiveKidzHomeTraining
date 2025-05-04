@@ -15,6 +15,22 @@
         android:theme="@style/Theme.CognitiveKidsHomeTraining"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
+        <activity
+            android:name=".ChangeUsernameActivity"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
+        <activity
+            android:name=".FAQsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.toolbarNoACtionbar"
+            />
         <activity
             android:name=".dr_todo"
             android:exported="false"
@@ -132,10 +148,11 @@
         <activity
             android:name=".home"
             android:exported="false"
-            android:theme="@style/Theme.toolbarNoACtionbar">
+            >
             <meta-data
                 android:name="android.app.lib_name"
-                android:value="" />
+                android:value=""
+                />
         </activity>
         <activity
             android:name=".registration"

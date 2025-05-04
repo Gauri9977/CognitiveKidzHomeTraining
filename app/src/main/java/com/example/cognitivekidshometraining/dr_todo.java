@@ -7,12 +7,18 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +30,10 @@ import java.util.List;
 
 public class dr_todo extends AppCompatActivity {
 
+    Toolbar toolbar;
+    TextView toolbar_title;
+    ImageView toolbar_left_image;
+    ActionBarDrawerToggle toggle;
     private Spinner spinnerChildName;
     private TextView disorder_tv, selectedActivities_tv;
     private LinearLayout onlineActivitiesLayout;
@@ -47,6 +57,25 @@ public class dr_todo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dr_todo);
+
+        toolbar = findViewById(R.id.toolbar);
+        toolbar_title = toolbar.findViewById(R.id.toolbar_right_text);
+        toolbar_left_image = toolbar.findViewById(R.id.toolbar_left_image);
+        toolbar_title.setText("\uD83D\uDCDD Assign Activities");
+        toolbar_left_image.setVisibility(View.GONE);
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.drawer_frag1, new DrawerFragment1()).commit();
+
+        DrawerLayout drawer = findViewById(R.id.dr_todo_page);
+        toggle = new ActionBarDrawerToggle(dr_todo.this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer);
+        drawer.addDrawerListener(toggle);
+
+        toggle.setToolbarNavigationClickListener(v ->{});
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
+
+        toggle.syncState();
 
         spinnerChildName = findViewById(R.id.spinnerChildName);
         disorder_tv = findViewById(R.id.disorder_tv);
